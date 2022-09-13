@@ -24,37 +24,56 @@
                             <constraint firstAttribute="width" constant="85" id="wjx-9X-W3B"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qik-Ho-3Aj">
-                        <rect key="frame" x="125" y="10" width="250" height="33"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qik-Ho-3Aj">
+                        <rect key="frame" x="125" y="10" width="250" height="19.5"/>
                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Vote" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FOx-dh-Ofh">
-                        <rect key="frame" x="125" y="51" width="250" height="14.5"/>
+                        <rect key="frame" x="141" y="37.5" width="234" height="14.5"/>
                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
                         <color key="textColor" systemColor="systemGray6Color"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Lenght" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="24B-kM-Y4F">
                         <rect key="frame" x="125" y="114.5" width="230" height="14.5"/>
+                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vJ3-P5-cii">
+                        <rect key="frame" x="125" y="60" width="230" height="46.5"/>
                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ydt-Ly-hVz">
+                        <rect key="frame" x="125" y="37" width="12" height="12"/>
+                        <color key="tintColor" systemColor="systemYellowColor"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="12" id="lf3-aQ-Xyu"/>
+                            <constraint firstAttribute="height" constant="12" id="nce-mI-2YK"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="FOx-dh-Ofh" secondAttribute="trailing" constant="24" id="BOp-zL-1uc"/>
+                    <constraint firstItem="vJ3-P5-cii" firstAttribute="leading" secondItem="dQD-Q3-nUP" secondAttribute="trailing" constant="16" id="C4c-I5-xyf"/>
                     <constraint firstItem="Qik-Ho-3Aj" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="CKa-uR-SCT"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="vJ3-P5-cii" secondAttribute="trailing" constant="24" id="FNd-Hg-hpb"/>
                     <constraint firstItem="Qik-Ho-3Aj" firstAttribute="leading" secondItem="dQD-Q3-nUP" secondAttribute="trailing" constant="16" id="Kk0-6a-oj9"/>
-                    <constraint firstItem="24B-kM-Y4F" firstAttribute="top" relation="lessThanOrEqual" secondItem="FOx-dh-Ofh" secondAttribute="bottom" constant="49" id="PDM-Ad-Ezk"/>
+                    <constraint firstItem="FOx-dh-Ofh" firstAttribute="leading" secondItem="ydt-Ly-hVz" secondAttribute="trailing" constant="4" id="Ngu-44-puA"/>
                     <constraint firstItem="dQD-Q3-nUP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="SVV-o1-7U2"/>
                     <constraint firstAttribute="trailing" secondItem="Qik-Ho-3Aj" secondAttribute="trailing" constant="24" id="ShN-fD-V8u"/>
                     <constraint firstItem="FOx-dh-Ofh" firstAttribute="top" secondItem="Qik-Ho-3Aj" secondAttribute="bottom" constant="8" id="VAm-Kw-ZQn"/>
-                    <constraint firstItem="FOx-dh-Ofh" firstAttribute="leading" secondItem="dQD-Q3-nUP" secondAttribute="trailing" constant="16" id="YUY-Tb-1Uc"/>
+                    <constraint firstItem="ydt-Ly-hVz" firstAttribute="top" secondItem="Qik-Ho-3Aj" secondAttribute="bottom" constant="8" id="XXg-Qd-VQn"/>
                     <constraint firstItem="dQD-Q3-nUP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="24" id="Yh7-t7-a23"/>
                     <constraint firstItem="24B-kM-Y4F" firstAttribute="leading" secondItem="dQD-Q3-nUP" secondAttribute="trailing" constant="16" id="djR-A5-IO9"/>
+                    <constraint firstItem="24B-kM-Y4F" firstAttribute="top" relation="lessThanOrEqual" secondItem="vJ3-P5-cii" secondAttribute="bottom" constant="8" id="ezA-fG-Teb"/>
+                    <constraint firstItem="vJ3-P5-cii" firstAttribute="top" relation="lessThanOrEqual" secondItem="FOx-dh-Ofh" secondAttribute="bottom" constant="8" id="g3q-bG-y6I"/>
+                    <constraint firstItem="ydt-Ly-hVz" firstAttribute="leading" secondItem="dQD-Q3-nUP" secondAttribute="trailing" constant="16" id="ofP-pj-ncQ"/>
                     <constraint firstAttribute="bottom" secondItem="dQD-Q3-nUP" secondAttribute="bottom" constant="10" id="sIr-30-E5r"/>
                     <constraint firstAttribute="bottomMargin" secondItem="24B-kM-Y4F" secondAttribute="bottom" constant="10" id="tsT-vC-G8t"/>
                     <constraint firstAttribute="trailingMargin" secondItem="24B-kM-Y4F" secondAttribute="trailing" constant="24" id="x40-1w-20e"/>
@@ -62,20 +81,25 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="durationLabel" destination="24B-kM-Y4F" id="Ksm-Op-pUp"/>
+                <outlet property="genreLabel" destination="vJ3-P5-cii" id="CwB-8X-Iql"/>
                 <outlet property="movieImageView" destination="dQD-Q3-nUP" id="J1h-hM-PgV"/>
                 <outlet property="ratingLabel" destination="FOx-dh-Ofh" id="va1-Sh-DzZ"/>
+                <outlet property="releaseLabel" destination="24B-kM-Y4F" id="Ksm-Op-pUp"/>
                 <outlet property="titleLabel" destination="Qik-Ho-3Aj" id="uZO-Vi-iMf"/>
             </connections>
-            <point key="canvasLocation" x="194.92753623188406" y="113.16964285714285"/>
+            <point key="canvasLocation" x="202.17391304347828" y="107.14285714285714"/>
         </tableViewCell>
     </objects>
     <resources>
+        <image name="star.fill" catalog="system" width="128" height="116"/>
         <systemColor name="systemGray6Color">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemYellowColor">
+            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

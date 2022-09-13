@@ -15,7 +15,10 @@ class MainViewModel: TableViewModelType {
     var nowPlaying: Observable<[NowPlayingMovieCellViewModel]> = Observable(nil)
     var popularModel: PopularMovie?
     var popularMovie: Observable<[PopularMovieCellViewModel]> = Observable(nil)
-
+    var genreData: GenreData?
+    
+    
+    
     var sectionTitle: [String] {
         return ["Playing Now", "Popular"]
     }
@@ -31,27 +34,58 @@ class MainViewModel: TableViewModelType {
    
     
     func getData() {
-       /* dataFetchService.fetchnowMovie { [weak self] (result) in
+        dataFetchService.fetchGenres { [weak self] (result) in
+            self?.genreData = result
+            
+        }
+        dataFetchService.fetchNowMovie { [weak self] (result) in
             self?.nowPlayingModel = result
             self?.mapNowPlayingMovieData()
         }
-        */
+        
         
         dataFetchService.fetchMovie { [weak self] (result) in
             self?.popularModel = result
             self?.mapPopularMovieData()
         }
+        
+        
+        
+        
     }
     
     private func mapNowPlayingMovieData() {
-        nowPlaying.value = self.nowPlayingModel?.results.compactMap({NowPlayingMovieCellViewModel(image: $0.posterPath, title: $0.title)})
+        nowPlaying.value = self.nowPlayingModel?.results.compactMap({NowPlayingMovieCellViewModel(movie: $0)
+        })
     }
     
     private func mapPopularMovieData() {
         
-        popularMovie.value = self.popularModel?.results.compactMap({ PopularMovieCellViewModel(movie: $0)
+        popularMovie.value = self.popularModel?.results.compactMap({ PopularMovieCellViewModel(movie: $0, genre: genreData!)
+           
         })
+       
+    }
+   
+    
+    func retriveMovieDetails(with id: Int) -> Result? {
+        guard let movie = popularModel?.results.first(where: {$0.id == id}) else {
+            return nil
+        }
+        return movie
+    }
+    
+   
+      
+    func retriveGenre(_ movie: Result,_ genre: Genre) -> [String] {
+        var array3: [String] = []
+        for id in movie.genreIDS {
+            if id == genre.id {
+                array3.append(genre.name)
+            }
+        }
         
+        return array3
     }
     
 }

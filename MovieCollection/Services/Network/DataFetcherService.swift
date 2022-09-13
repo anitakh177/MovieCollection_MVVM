@@ -20,9 +20,14 @@ class DataFetcherService {
         dataFetcher.fetchGenericJSONData(urlString: urlMovie, response: completion)
     }
     
-    func fetchnowMovie(completion: @escaping(NowPlaying?) -> Void) {
+    func fetchNowMovie(completion: @escaping(NowPlaying?) -> Void) {
         let urlMovie = "https://api.themoviedb.org/3/movie/now_playing?api_key=62d229b93c02da4c5355f1bfe7de1181&language=en-US"
         dataFetcher.fetchGenericJSONData(urlString: urlMovie, response: completion)
+    }
+    
+    func fetchGenres(completion: @escaping(GenreData?) -> Void) {
+        let urlGenre = "https://api.themoviedb.org/3/genre/movie/list?api_key=62d229b93c02da4c5355f1bfe7de1181&language=en-US"
+        dataFetcher.fetchGenericJSONData(urlString: urlGenre, response: completion)
     }
     
     

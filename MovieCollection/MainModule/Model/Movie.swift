@@ -46,7 +46,7 @@ struct Result: Codable {
     let backdropPath: String
     let genreIDS: [Int]
     let id: Int
-    let originalTitle, overview: String
+    let originalLanguage, originalTitle, overview: String
     let popularity: Double
     let posterPath, releaseDate, title: String
     let video: Bool
@@ -58,6 +58,7 @@ struct Result: Codable {
         case backdropPath = "backdrop_path"
         case genreIDS = "genre_ids"
         case id
+        case originalLanguage = "original_language"
         case originalTitle = "original_title"
         case overview, popularity
         case posterPath = "poster_path"
@@ -67,5 +68,6 @@ struct Result: Codable {
         case voteCount = "vote_count"
     }
 }
+
 
 

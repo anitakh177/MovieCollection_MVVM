@@ -30,8 +30,8 @@
             filePath = "MovieCollection/MainModule/View/Cell/PopularMovieTableViewCell.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "30"
-            endingLineNumber = "30"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
             landmarkName = "configureCellData(viewModel:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -46,8 +46,151 @@
             filePath = "MovieCollection/MainModule/Controller/MainViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
+            startingLineNumber = "117"
+            endingLineNumber = "117"
+            landmarkName = "tableView(_:cellForRowAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F693AD2E-CE2A-46F1-A89B-CE68073B6F34"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MovieCollection/MainModule/Controller/MainViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "15"
+            endingLineNumber = "15"
+            landmarkName = "MainViewController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "F693AD2E-CE2A-46F1-A89B-CE68073B6F34 - ffbb4f307b399a85"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MovieCollection.MainViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; MovieCollection.MainViewController"
+                  moduleName = "MovieCollection"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/anita/Desktop/projects/Apps/MovieCollection/MovieCollection/MainModule/Controller/MainViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "160">
+               </Location>
+               <Location
+                  uuid = "F693AD2E-CE2A-46F1-A89B-CE68073B6F34 - 891e10af52243da"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MovieCollection.MainViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;MovieCollection.MainViewController&gt;"
+                  moduleName = "MovieCollection"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/anita/Desktop/projects/Apps/MovieCollection/MovieCollection/MainModule/Controller/MainViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "136">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "45FE07DA-4A3C-429B-BDFA-57A00F35B67C"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MovieCollection/MainModule/View/CollectionView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
+            landmarkName = "collectionView(_:numberOfItemsInSection:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4A0E8840-2BD8-4373-B33C-52BAD12A349B"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MovieCollection/MainModule/View/Cell/CollectionTableViewCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "14"
+            endingLineNumber = "14"
+            landmarkName = "CollectionTableViewCell"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "4A0E8840-2BD8-4373-B33C-52BAD12A349B - 229123114f9a6626"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MovieCollection.CollectionTableViewCell.movieCollectionView.getter : __C.UICollectionView"
+                  moduleName = "MovieCollection"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/anita/Desktop/projects/Apps/MovieCollection/MovieCollection/MainModule/View/Cell/CollectionTableViewCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "48">
+               </Location>
+               <Location
+                  uuid = "4A0E8840-2BD8-4373-B33C-52BAD12A349B - 49b3a45a2fba5c21"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MovieCollection.CollectionTableViewCell.init(style: __C.UITableViewCellStyle, reuseIdentifier: Swift.Optional&lt;Swift.String&gt;) -&gt; MovieCollection.CollectionTableViewCell"
+                  moduleName = "MovieCollection"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/anita/Desktop/projects/Apps/MovieCollection/MovieCollection/MainModule/View/Cell/CollectionTableViewCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "76">
+               </Location>
+               <Location
+                  uuid = "4A0E8840-2BD8-4373-B33C-52BAD12A349B - eb8dd636b49ac7d6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MovieCollection.CollectionTableViewCell.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;MovieCollection.CollectionTableViewCell&gt;"
+                  moduleName = "MovieCollection"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/anita/Desktop/projects/Apps/MovieCollection/MovieCollection/MainModule/View/Cell/CollectionTableViewCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "72">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D8CC332A-CBEB-4EEB-8072-1F43F4B1966F"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MovieCollection/DetailModule/Controller/DetailViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>

@@ -8,7 +8,6 @@
 import UIKit
 
 class CollectionView: UICollectionView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-   
     
     init() {
         let layout = UICollectionViewFlowLayout()
@@ -34,15 +33,28 @@ class CollectionView: UICollectionView, UICollectionViewDelegate, UICollectionVi
         fatalError("init(coder:) has not been implemented")
     }
     
+    
+    // MARK: - Properties
+    var viewModel = MainViewModel()
+    var movieDataSource: [NowPlayingMovieCellViewModel] = []
+    
+    func configure(with model: [NowPlayingMovieCellViewModel]) {
+        self.movieDataSource = model
+        reloadData()
+       
+    }
+    
     // MARK: - Data Source
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        3
+       // print(viewModel.nowPlayingModel?.results)
+        return  viewModel.numberOfRows(in: section)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = dequeueReusableCell(withReuseIdentifier: "\(MovieCollectionViewCell.self)", for: indexPath) as? MovieCollectionViewCell
-        
+      
+       // cell?.configureCellData(viewModel: movieDataSource[indexPath.row])
         return cell ?? UICollectionViewCell()
     }
     

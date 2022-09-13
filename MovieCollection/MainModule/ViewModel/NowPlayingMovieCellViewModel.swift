@@ -7,7 +7,18 @@
 
 import Foundation
 
-struct NowPlayingMovieCellViewModel {
-    let image: String
-    let title: String
+class NowPlayingMovieCellViewModel: CellViewModelType {
+    
+    var image: URL?
+    var title: String
+    
+    init(movie: Result) {
+        
+        self.title = movie.title
+        self.image = makeImageURL(movie.posterPath)
+    }
+    
+    func makeImageURL(_ imageCode: String) -> URL? {
+        URL(string: "https://image.tmdb.org/t/p/w500/\(imageCode)")
+    }
 }

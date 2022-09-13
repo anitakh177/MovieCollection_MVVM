@@ -1,35 +1,41 @@
 //
-//  PopularMovieCellViewModel.swift
+//  DetailTableCellViewModel.swift
 //  MovieCollection
 //
-//  Created by anita on 07.09.2022.
+//  Created by anita on 09.09.2022.
 //
 
 import Foundation
+ 
+class DetailTableCellViewModel: CellViewModelType {
 
-class PopularMovieCellViewModel: CellViewModelType {
-    
-    var movieID: Int
-    var title: String
+    var movie: Result
     var image: URL?
-    var rating: Double
-    var releaseDate: String
+    var title: String
+    var rating: String
     var genres: String = ""
+    var originalLanguage: String
+    var overview: String
+    var releaseDate: String
+ 
+    
     
     init(movie: Result, genre: GenreData) {
-        self.movieID = movie.id
+        self.movie = movie
         self.title = movie.title
-        self.rating = movie.voteAverage
+        self.rating = "\(movie.voteAverage)/10 IMDb"
+        self.originalLanguage = movie.originalLanguage
+        self.overview = movie.overview
         self.releaseDate = movie.releaseDate
-        self.genres = getGenre(genreIds: movie.genreIDS, genreData: genre)
         self.image = makeImageURL(movie.posterPath)
-      
+        self.genres = getGenre(genreIds: movie.genreIDS, genreData: genre)
+    }
+    
+    func makeImageURL(_ imageCode: String) -> URL? {
+        URL(string: "https://image.tmdb.org/t/p/w500/\(imageCode)")
         
     }
     
-    internal func makeImageURL(_ imageCode: String) -> URL? {
-       URL(string: "https://image.tmdb.org/t/p/w500/\(imageCode)")
-    }
     func getGenre(genreIds : [Int], genreData: GenreData?) -> String {
                 var genreString = ""
                 for genreId in genreIds {
@@ -45,15 +51,7 @@ class PopularMovieCellViewModel: CellViewModelType {
                 return String(genreString.dropLast(2))
             }
     
-  /*  func getMovieGenre(_ genreID: Int, _ name: String, _ movieID: [Int]) -> [String] {
-        
-        for id in movieID {
-            if id == genreID {
-                genres.append(name)
-                
-            }
-        }
-        return genres
+    func numberOfRows() -> Int {
+       return 4
     }
-    */
 }

@@ -11,7 +11,7 @@ class CollectionTableViewCell: UITableViewCell {
     
     // MARK: - Properties
     
-    private let collectionView2 = CollectionView()
+     let movieCollectionView = CollectionView()
     
     // MARK: - Views
 
@@ -27,16 +27,18 @@ class CollectionTableViewCell: UITableViewCell {
     
     private func configureCollectionView() {
         contentView.backgroundColor = .black
-        contentView.addSubview(collectionView2)
+        contentView.addSubview(movieCollectionView)
         
         NSLayoutConstraint.activate([
-            collectionView2.leadingAnchor.constraint(equalTo: leadingAnchor),
-            collectionView2.trailingAnchor.constraint(equalTo: trailingAnchor),
-            collectionView2.topAnchor.constraint(equalTo: topAnchor),
-            collectionView2.bottomAnchor.constraint(equalTo: bottomAnchor)
+            movieCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            movieCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            movieCollectionView.topAnchor.constraint(equalTo: topAnchor),
+            movieCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor)
         
-        
+
         ])
     }
+    
+    
     
 }

@@ -14,7 +14,12 @@ class PopularMovieTableViewCell: UITableViewCell {
     @IBOutlet private weak var movieImageView: UIImageView!
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var ratingLabel: UILabel!
-    @IBOutlet private weak var durationLabel: UILabel!
+    @IBOutlet private weak var releaseLabel: UILabel!
+    @IBOutlet private weak var genreLabel: UILabel!
+    
+   
+    
+    // MARK: - Properties
     
     var downloadTask: URLSessionDownloadTask?
     
@@ -29,8 +34,9 @@ class PopularMovieTableViewCell: UITableViewCell {
     
     func configureCellData(viewModel: PopularMovieCellViewModel) {
         titleLabel.text = viewModel.title
-        durationLabel.text =  viewModel.releaseDate
-        ratingLabel.text =  "\(viewModel.rating)/10"
+        releaseLabel.text = viewModel.releaseDate
+        ratingLabel.text =  "\(viewModel.rating)/10 IMDb"
+        genreLabel.text = viewModel.genres
        
         downloadTask = movieImageView.loadImage(url: viewModel.image!)
         
