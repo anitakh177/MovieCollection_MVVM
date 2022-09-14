@@ -22,8 +22,8 @@ class CollectionView: UICollectionView, UICollectionViewDelegate, UICollectionVi
         
         translatesAutoresizingMaskIntoConstraints = false
         
-        layout.minimumLineSpacing = InsetConstants.minimumLineSpacing
-        contentInset = UIEdgeInsets(top: 0, left: InsetConstants.leftDistanceToView, bottom: 0, right: InsetConstants.rightDistanceToView)
+        layout.minimumLineSpacing = MovieInsetConstants.minimumLineSpacing
+        contentInset = UIEdgeInsets(top: 0, left: MovieInsetConstants.leftDistanceToView, bottom: 0, right: MovieInsetConstants.rightDistanceToView)
         
         showsHorizontalScrollIndicator = false
         
@@ -61,7 +61,7 @@ class CollectionView: UICollectionView, UICollectionViewDelegate, UICollectionVi
     // MARK: - Flow Layout Delegate
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: InsetConstants.itemWidth, height: InsetConstants.itemHeight)
+        return CGSize(width: MovieInsetConstants.itemWidth, height: MovieInsetConstants.itemHeight)
     }
     
 }

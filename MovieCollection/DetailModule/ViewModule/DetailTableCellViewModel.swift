@@ -10,6 +10,7 @@ import Foundation
 class DetailTableCellViewModel: CellViewModelType {
 
     var movie: Result
+    var id: Int
     var image: URL?
     var title: String
     var rating: String
@@ -17,6 +18,7 @@ class DetailTableCellViewModel: CellViewModelType {
     var originalLanguage: String
     var overview: String
     var releaseDate: String
+    
  
     
     
@@ -25,11 +27,17 @@ class DetailTableCellViewModel: CellViewModelType {
         self.title = movie.title
         self.rating = "\(movie.voteAverage)/10 IMDb"
         self.originalLanguage = movie.originalLanguage
+        self.id = movie.id
         self.overview = movie.overview
         self.releaseDate = movie.releaseDate
         self.image = makeImageURL(movie.posterPath)
         self.genres = getGenre(genreIds: movie.genreIDS, genreData: genre)
     }
+    var castCellView: Observable<[CastCollectionViewModel]> = Observable(nil)
+   
+    let dataFetchService = DataFetcherService()
+    var castData: Cast?
+    weak var delegate: GetMovieIDToFetchCast?
     
     func makeImageURL(_ imageCode: String) -> URL? {
         URL(string: "https://image.tmdb.org/t/p/w500/\(imageCode)")
@@ -51,7 +59,24 @@ class DetailTableCellViewModel: CellViewModelType {
                 return String(genreString.dropLast(2))
             }
     
+    
     func numberOfRows() -> Int {
-       return 4
+       return 5
     }
+    
+    func getData() {
+        guard let movieID = delegate?.getMovieID() else { return }
+        dataFetchService.fetchCast(movieID: movieID) { [weak self] (result) in
+            self?.castData = result
+            self?.mapCastCell()
+          
+        }
+        
+    }
+    
+    func mapCastCell() {
+        castCellView.value = self.castData?.cast.compactMap({CastCollectionViewModel(cast: $0)})
+        
+    }
+     
 }

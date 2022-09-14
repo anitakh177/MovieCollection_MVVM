@@ -16,6 +16,7 @@ class DetailViewController: UIViewController {
     // MARK: - Properties
     
     var viewModel: DetailTableCellViewModel
+    var castCellDataSource: [CastCollectionViewModel] = []
     
     init(viewModel: DetailTableCellViewModel) {
         self.viewModel = viewModel
@@ -28,13 +29,30 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.delegate = self
+        viewModel.getData()
+        bindViewModel()
         configureTableView()
+       
       
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+       
     }
 
 }
 
 private extension DetailViewController {
+    
+    func bindViewModel() {
+        viewModel.castCellView.bind { [weak self] (result) in
+            guard let self = self, let result = result else { return }
+            self.castCellDataSource = result
+            self.tableView.reloadData()
+
+        }
+    }
     
     func configureTableView() {
         tableView.delegate = self
@@ -42,10 +60,12 @@ private extension DetailViewController {
         tableView.backgroundColor = .white
         tableView.contentInsetAdjustmentBehavior = .never
         
+        
         tableView.register(UINib(nibName: "\(ImageTableViewCell.self)", bundle: .main), forCellReuseIdentifier: "\(ImageTableViewCell.self)")
         tableView.register(UINib(nibName: "\(TitleTableViewCell.self)", bundle: .main), forCellReuseIdentifier: "\(TitleTableViewCell.self)")
         tableView.register(UINib(nibName: "\(ParametersTableViewCell.self)" , bundle: .main), forCellReuseIdentifier: "\(ParametersTableViewCell.self)")
         tableView.register(UINib(nibName: "\(OverviewTableViewCell.self)", bundle: .main), forCellReuseIdentifier: "\(OverviewTableViewCell.self)")
+        tableView.register(UINib(nibName: "\(CastTableViewCell.self)", bundle: .main), forCellReuseIdentifier: "\(CastTableViewCell.self)")
 
         
     }
@@ -83,6 +103,10 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
             
                 return cell ?? UITableViewCell()
            
+        case 4:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "\(CastTableViewCell.self)", for: indexPath) as? CastTableViewCell
+            cell?.updateCell(with: castCellDataSource)
+            return cell ?? UITableViewCell()
             
             default:
                 return UITableViewCell()
@@ -91,12 +115,24 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == 0 {
-        return 350
-        } else {
+        switch indexPath.row {
+        case 0:
+            return 350
+        case 2:
+            return 70
+        default:
             return UITableView.automaticDimension
+            
         }
+     
     }
     
     
 }
+extension DetailViewController: GetMovieIDToFetchCast {
+    func getMovieID() -> Int {
+        return viewModel.id
+    }
+}
+
+

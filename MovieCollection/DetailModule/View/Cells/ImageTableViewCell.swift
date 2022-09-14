@@ -28,8 +28,10 @@ class ImageTableViewCell: UITableViewCell {
         roundedCornerView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
     }
     func configureCellData(viewModel: DetailTableCellViewModel) {
-        
-        downloadTask = movieImage.loadImage(url: viewModel.image!)
+        if let imageURL = viewModel.image {
+            downloadTask = movieImage.loadImage(url: imageURL)
+        }
+     
     
     }
 }

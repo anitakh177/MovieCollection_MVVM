@@ -30,5 +30,10 @@ class DataFetcherService {
         dataFetcher.fetchGenericJSONData(urlString: urlGenre, response: completion)
     }
     
+    func fetchCast(movieID: Int, completin: @escaping(Cast?) -> Void) {
+        let urlCast = "https://api.themoviedb.org/3/movie/\(movieID)/credits?api_key=62d229b93c02da4c5355f1bfe7de1181&language=en-US"
+        dataFetcher.fetchGenericJSONData(urlString: urlCast, response: completin)
+    }
+    
     
 }

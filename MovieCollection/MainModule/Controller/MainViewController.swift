@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol GetMovieIDToFetchCast: AnyObject {
+    func getMovieID() -> Int
+}
+
 class MainViewController: UIViewController {
 
     // MARK: - Views
@@ -21,6 +25,8 @@ class MainViewController: UIViewController {
     private var popularMovieDataSource: [PopularMovieCellViewModel] = []
     private var nowPlayingDataSource: [NowPlayingMovieCellViewModel] = []
     
+   
+    
     
         
     // MARK: - Lifecycle
@@ -29,6 +35,7 @@ class MainViewController: UIViewController {
         viewModel.getData()
         bindViewModel()
         configureAppearance()
+     
         
     }
 
@@ -141,14 +148,14 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         guard let header = view as? UITableViewHeaderFooterView else { return }
         header.textLabel?.font = .systemFont(ofSize: 20, weight: .bold)
         header.textLabel?.textColor = .white
-        header.textLabel?.frame = CGRect(x: InsetConstants.leftDistanceToView, y: header.bounds.origin.y, width: 200, height: header.bounds.height)
+        header.textLabel?.frame = CGRect(x: MovieInsetConstants.leftDistanceToView, y: header.bounds.origin.y, width: 200, height: header.bounds.height)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let movieID = popularMovieDataSource[indexPath.row].movieID
-        self.openDetail(movieID: movieID)
-        print("opened")
         
+        self.openDetail(movieID: movieID)
     }
     
 }
+

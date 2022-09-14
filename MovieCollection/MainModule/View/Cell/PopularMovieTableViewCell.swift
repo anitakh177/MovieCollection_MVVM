@@ -38,8 +38,10 @@ class PopularMovieTableViewCell: UITableViewCell {
         ratingLabel.text =  "\(viewModel.rating)/10 IMDb"
         genreLabel.text = viewModel.genres
        
-        downloadTask = movieImageView.loadImage(url: viewModel.image!)
-        
+        if let imageURL = viewModel.image {
+            downloadTask = movieImageView.loadImage(url: imageURL)
+        }
+     
         
     }
     
