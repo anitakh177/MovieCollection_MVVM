@@ -19,9 +19,6 @@ class DetailTableCellViewModel: CellViewModelType {
     var overview: String
     var releaseDate: String
     
- 
-    
-    
     init(movie: Result, genre: GenreData) {
         self.movie = movie
         self.title = movie.title
@@ -37,12 +34,15 @@ class DetailTableCellViewModel: CellViewModelType {
    
     let dataFetchService = DataFetcherService()
     var castData: Cast?
+    var castImageData: CastImage?
     weak var delegate: GetMovieIDToFetchCast?
     
     func makeImageURL(_ imageCode: String) -> URL? {
         URL(string: "https://image.tmdb.org/t/p/w500/\(imageCode)")
         
     }
+    
+   
     
     func getGenre(genreIds : [Int], genreData: GenreData?) -> String {
                 var genreString = ""
@@ -65,16 +65,31 @@ class DetailTableCellViewModel: CellViewModelType {
     }
     
     func getData() {
-        guard let movieID = delegate?.getMovieID() else { return }
-        dataFetchService.fetchCast(movieID: movieID) { [weak self] (result) in
-            self?.castData = result
-            self?.mapCastCell()
-          
+        DispatchQueue.main.async {
+            guard let movieID = self.delegate?.getMovieID() else { return }
+                self.dataFetchService.fetchCast(movieID: movieID) { [weak self] (result) in
+                self?.castData = result
+                self?.mapCastCell()
+            }
         }
-        
+       /*
+        guard let personID = delegate?.getPersonID() else { return }
+        for id in personID {
+            dataFetchService.fetchCastImage(castID: id) { [weak self] (result) in
+                self?.castImageData = result
+                print(self?.castImageData)
+            }
+        }
+        */
+       /* dataFetchService.fetchCastImage(castID: personID) { [weak self] (result) in
+            self?.castImageData = result
+            print(self?.castImageData)
+        }
+        */
     }
     
     func mapCastCell() {
+       // guard let castImageData = castImageData else { return }
         castCellView.value = self.castData?.cast.compactMap({CastCollectionViewModel(cast: $0)})
         
     }

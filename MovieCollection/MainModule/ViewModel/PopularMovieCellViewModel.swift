@@ -27,7 +27,7 @@ class PopularMovieCellViewModel: CellViewModelType {
         
     }
     
-    internal func makeImageURL(_ imageCode: String) -> URL? {
+    func makeImageURL(_ imageCode: String) -> URL? {
        URL(string: "https://image.tmdb.org/t/p/w500/\(imageCode)")
     }
     func getGenre(genreIds : [Int], genreData: GenreData?) -> String {

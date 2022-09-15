@@ -9,6 +9,7 @@ import UIKit
 
 protocol GetMovieIDToFetchCast: AnyObject {
     func getMovieID() -> Int
+    func getPersonID() -> [Int]
 }
 
 class MainViewController: UIViewController {

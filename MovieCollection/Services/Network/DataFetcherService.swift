@@ -35,5 +35,10 @@ class DataFetcherService {
         dataFetcher.fetchGenericJSONData(urlString: urlCast, response: completin)
     }
     
+    func fetchCastImage(castID: Int, completion: @escaping(CastImage?) -> Void) {
+        let urlCastImage = "https://api.themoviedb.org/3/person/\(castID)/images?api_key=62d229b93c02da4c5355f1bfe7de1181"
+        dataFetcher.fetchGenericJSONData(urlString: urlCastImage, response: completion)
+    }
+    
     
 }

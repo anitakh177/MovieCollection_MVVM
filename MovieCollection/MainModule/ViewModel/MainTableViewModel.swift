@@ -17,9 +17,6 @@ class MainViewModel: TableViewModelType {
     var popularMovie: Observable<[PopularMovieCellViewModel]> = Observable(nil)
     var genreData: GenreData?
    
-    //var castData: Cast?
-   // weak var delegate: MovieIDDelegate?
-    
     var sectionTitle: [String] {
         return ["Playing Now", "Popular"]
     }
@@ -35,28 +32,35 @@ class MainViewModel: TableViewModelType {
    
     
     func getData() {
-        dataFetchService.fetchGenres { [weak self] (result) in
-            self?.genreData = result
+        
+            let dispatchGroup = DispatchGroup()
             
-        }
-        dataFetchService.fetchNowMovie { [weak self] (result) in
-            self?.nowPlayingModel = result
-            self?.mapNowPlayingMovieData()
+            dispatchGroup.enter()
+            self.dataFetchService.fetchGenres { [weak self] (result) in
+                self?.genreData = result
+                
+            }
+            dispatchGroup.leave()
+            
+            dispatchGroup.enter()
+            self.dataFetchService.fetchNowMovie { [weak self] (result) in
+                self?.nowPlayingModel = result
+                self?.mapNowPlayingMovieData()
+            }
+            
+            
+            self.dataFetchService.fetchMovie { [weak self] (result) in
+                self?.popularModel = result
+                self?.mapPopularMovieData()
+            }
+            dispatchGroup.leave()
+            dispatchGroup.notify(queue: .main) {
+                print("work done: \(Thread.current)")
+            }
         }
         
-        
-        dataFetchService.fetchMovie { [weak self] (result) in
-            self?.popularModel = result
-            self?.mapPopularMovieData()
-        }
-       /*
-       guard let movieID = delegate?.getMovieID() else { return }
-        dataFetchService.fetchCast(movieID: movieID) { [weak self] (result) in
-            self?.castData = result
-            print(self?.castData)
-        }
-        */
-    }
+    
+
     
     private func mapNowPlayingMovieData() {
         nowPlaying.value = self.nowPlayingModel?.results.compactMap({NowPlayingMovieCellViewModel(movie: $0)

@@ -29,16 +29,12 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.delegate = self
-        viewModel.getData()
+       // viewModel.delegate = self
+       // viewModel.getData()
         bindViewModel()
         configureTableView()
        
       
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-       
     }
 
 }
@@ -130,9 +126,25 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
     
 }
 extension DetailViewController: GetMovieIDToFetchCast {
+   
     func getMovieID() -> Int {
         return viewModel.id
     }
+    
+    func getPersonID() -> [Int] {
+        var ids: [Int] = []
+       /* _ = castCellDataSource.forEach({  id in
+            ids.append(id.personID)
+        })
+        print(ids)*/
+       // return  []
+        
+        
+        return [4826, 5999]
+    
+    }
+    
+    
 }
 
 
