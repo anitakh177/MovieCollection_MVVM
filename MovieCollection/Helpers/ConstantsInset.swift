@@ -11,8 +11,8 @@ struct MovieInsetConstants {
     static let leftDistanceToView: CGFloat = 24
     static let rightDistanceToView: CGFloat = 24
     static let minimumLineSpacing: CGFloat = 16
-    static let itemWidth = (UIScreen.main.bounds.width - MovieInsetConstants.leftDistanceToView - MovieInsetConstants.rightDistanceToView - (MovieInsetConstants.minimumLineSpacing / 2)) / 2
-    static let itemHeight: CGFloat = 280
+    static let itemWidth = (UIScreen.main.bounds.width - MovieInsetConstants.leftDistanceToView - MovieInsetConstants.rightDistanceToView - (MovieInsetConstants.minimumLineSpacing / 2)) / 2.3
+    static let itemHeight: CGFloat = 250
 }
 
 struct CastInsetConstants {

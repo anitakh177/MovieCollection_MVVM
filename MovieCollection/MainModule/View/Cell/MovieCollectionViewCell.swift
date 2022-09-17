@@ -14,22 +14,15 @@ class MovieCollectionViewCell: UICollectionViewCell {
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var posterImageView: UIImageView!
     
-    // MARK: - Properties
-    
-    var downloadTask: URLSessionDownloadTask?
-    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        posterImageView.layer.cornerRadius = 5
     }
     
     func configureCellData(viewModel: NowPlayingMovieCellViewModel) {
         titleLabel.text = viewModel.title
-        downloadTask = posterImageView.loadImage(url: viewModel.image!)
-        
+        posterImageView.sd_setImage(with: viewModel.image)
         
     }
-    
-
     
 }

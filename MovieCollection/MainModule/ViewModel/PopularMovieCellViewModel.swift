@@ -44,16 +44,5 @@ class PopularMovieCellViewModel: CellViewModelType {
                 }
                 return String(genreString.dropLast(2))
             }
-    
-  /*  func getMovieGenre(_ genreID: Int, _ name: String, _ movieID: [Int]) -> [String] {
-        
-        for id in movieID {
-            if id == genreID {
-                genres.append(name)
-                
-            }
-        }
-        return genres
-    }
-    */
+
 }

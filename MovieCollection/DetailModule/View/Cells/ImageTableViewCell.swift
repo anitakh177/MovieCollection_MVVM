@@ -14,9 +14,6 @@ class ImageTableViewCell: UITableViewCell {
     @IBOutlet private weak var movieImage: UIImageView!
     @IBOutlet private weak var roundedCornerView: UIView!
     
-    // MARK: - Properties
-    
-    var downloadTask: URLSessionDownloadTask?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -28,10 +25,7 @@ class ImageTableViewCell: UITableViewCell {
         roundedCornerView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
     }
     func configureCellData(viewModel: DetailTableCellViewModel) {
-        if let imageURL = viewModel.image {
-            downloadTask = movieImage.loadImage(url: imageURL)
+        movieImage.sd_setImage(with: viewModel.image)
         }
-     
     
-    }
 }

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class PopularMovieTableViewCell: UITableViewCell {
     
@@ -16,12 +17,6 @@ class PopularMovieTableViewCell: UITableViewCell {
     @IBOutlet private weak var ratingLabel: UILabel!
     @IBOutlet private weak var releaseLabel: UILabel!
     @IBOutlet private weak var genreLabel: UILabel!
-    
-   
-    
-    // MARK: - Properties
-    
-    var downloadTask: URLSessionDownloadTask?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -38,9 +33,7 @@ class PopularMovieTableViewCell: UITableViewCell {
         ratingLabel.text =  "\(viewModel.rating)/10 IMDb"
         genreLabel.text = viewModel.genres
        
-        if let imageURL = viewModel.image {
-            downloadTask = movieImageView.loadImage(url: imageURL)
-        }
+        movieImageView.sd_setImage(with: viewModel.image)
      
         
     }

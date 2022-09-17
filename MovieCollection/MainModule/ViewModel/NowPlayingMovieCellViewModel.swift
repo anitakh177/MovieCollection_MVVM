@@ -11,10 +11,13 @@ class NowPlayingMovieCellViewModel: CellViewModelType {
     
     var image: URL?
     var title: String
+    var movieID: Int
     
     init(movie: Result) {
         
         self.title = movie.title
+        self.movieID = movie.id
+
         self.image = makeImageURL(movie.posterPath)
     }
     

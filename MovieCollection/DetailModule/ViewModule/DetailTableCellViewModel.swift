@@ -30,21 +30,21 @@ class DetailTableCellViewModel: CellViewModelType {
         self.image = makeImageURL(movie.posterPath)
         self.genres = getGenre(genreIds: movie.genreIDS, genreData: genre)
     }
+    
     var castCellView: Observable<[CastCollectionViewModel]> = Observable(nil)
    
-    let dataFetchService = DataFetcherService()
-    var castData: Cast?
-    var castImageData: CastImage?
-    weak var delegate: GetMovieIDToFetchCast?
+   private let dataFetchService = DataFetcherService()
+   private var castData: Cast?
+   private var castImageData: CastImage?
+    weak var delegateCast: FetchCast?
+  
     
     func makeImageURL(_ imageCode: String) -> URL? {
         URL(string: "https://image.tmdb.org/t/p/w500/\(imageCode)")
         
     }
     
-   
-    
-    func getGenre(genreIds : [Int], genreData: GenreData?) -> String {
+   private func getGenre(genreIds : [Int], genreData: GenreData?) -> String {
                 var genreString = ""
                 for genreId in genreIds {
                     if let geners = (genreData?.genres) {
@@ -65,31 +65,37 @@ class DetailTableCellViewModel: CellViewModelType {
     }
     
     func getData() {
-        DispatchQueue.main.async {
-            guard let movieID = self.delegate?.getMovieID() else { return }
-                self.dataFetchService.fetchCast(movieID: movieID) { [weak self] (result) in
-                self?.castData = result
-                self?.mapCastCell()
-            }
+        let dispatchGroup = DispatchGroup()
+        
+        guard let movieID = delegateCast?.getMovieID() else { return }
+        
+        dispatchGroup.enter()
+        dataFetchService.fetchCast(movieID: movieID) { [weak self] (result) in
+            self?.castData = result
+            self?.mapCastCell()
         }
-       /*
-        guard let personID = delegate?.getPersonID() else { return }
-        for id in personID {
+        dispatchGroup.leave()
+        
+        guard let personID = delegateCast?.getPersonID() else { return }
+        
+        let _ = DispatchQueue.global(qos: .userInitiated)
+        
+        DispatchQueue.concurrentPerform(iterations: personID.count) { index in
+            let id = personID[index]
+            dispatchGroup.enter()
             dataFetchService.fetchCastImage(castID: id) { [weak self] (result) in
                 self?.castImageData = result
-                print(self?.castImageData)
+                dispatchGroup.leave()
             }
+         
         }
-        */
-       /* dataFetchService.fetchCastImage(castID: personID) { [weak self] (result) in
-            self?.castImageData = result
-            print(self?.castImageData)
+        
+        dispatchGroup.notify(queue: DispatchQueue.main) {
         }
-        */
+        
     }
     
-    func mapCastCell() {
-       // guard let castImageData = castImageData else { return }
+   private func mapCastCell() {
         castCellView.value = self.castData?.cast.compactMap({CastCollectionViewModel(cast: $0)})
         
     }

@@ -11,11 +11,12 @@ class MainViewModel: TableViewModelType {
     
     let dataFetchService = DataFetcherService()
     
-    var nowPlayingModel: NowPlaying?
-    var nowPlaying: Observable<[NowPlayingMovieCellViewModel]> = Observable(nil)
-    var popularModel: PopularMovie?
-    var popularMovie: Observable<[PopularMovieCellViewModel]> = Observable(nil)
-    var genreData: GenreData?
+   private var playingMovieModel: NowPlaying?
+   private var popularMovieModel: PopularMovie?
+   var genreData: GenreData?
+   var playingMovieDataSource: Observable<[NowPlayingMovieCellViewModel]> = Observable(nil)
+   var popularMovieDataSource: Observable<[PopularMovieCellViewModel]> = Observable(nil)
+    
    
     var sectionTitle: [String] {
         return ["Playing Now", "Popular"]
@@ -26,87 +27,67 @@ class MainViewModel: TableViewModelType {
     }
     
     func numberOfRows(in section: Int) -> Int {
-        return popularModel?.results.count ?? 0
+        return popularMovieModel?.results.count ?? 0
     }
     
    
     
     func getData() {
         
-            let dispatchGroup = DispatchGroup()
-            
-            dispatchGroup.enter()
-            self.dataFetchService.fetchGenres { [weak self] (result) in
-                self?.genreData = result
-                
-            }
+        let dispatchGroup = DispatchGroup()
+        dispatchGroup.enter()
+        dataFetchService.fetchGenres { [weak self] (result) in
+            self?.genreData = result
             dispatchGroup.leave()
-            
-            dispatchGroup.enter()
-            self.dataFetchService.fetchNowMovie { [weak self] (result) in
-                self?.nowPlayingModel = result
-                self?.mapNowPlayingMovieData()
-            }
-            
-            
-            self.dataFetchService.fetchMovie { [weak self] (result) in
-                self?.popularModel = result
-                self?.mapPopularMovieData()
-            }
-            dispatchGroup.leave()
-            dispatchGroup.notify(queue: .main) {
-                print("work done: \(Thread.current)")
-            }
+        }
+       
+        dispatchGroup.enter()
+        dataFetchService.fetchNowMovie { [weak self] (result) in
+            self?.playingMovieModel = result
+            self?.mapNowPlayingMovieData()
         }
         
-    
-
+        
+        dataFetchService.fetchMovie { [weak self] (result) in
+            self?.popularMovieModel = result
+            self?.mapPopularMovieData()
+            dispatchGroup.leave()
+        }
+        
+        
+        dispatchGroup.notify(queue: DispatchQueue.main) {
+        }
+      
+    }
     
     private func mapNowPlayingMovieData() {
-        nowPlaying.value = self.nowPlayingModel?.results.compactMap({NowPlayingMovieCellViewModel(movie: $0)
+        playingMovieDataSource.value = self.playingMovieModel?.results.compactMap({NowPlayingMovieCellViewModel(movie: $0)
         })
     }
     
     private func mapPopularMovieData() {
-        
         guard let genreData = genreData else { return  }
         
-        popularMovie.value = self.popularModel?.results.compactMap({ PopularMovieCellViewModel(movie: $0, genre: genreData)
-           
+        popularMovieDataSource.value = self.popularMovieModel?.results.compactMap({ PopularMovieCellViewModel(movie: $0, genre: genreData)
         })
        
     }
-   
+
     
     func retriveMovieDetails(with id: Int) -> Result? {
-        guard let movie = popularModel?.results.first(where: {$0.id == id}) else {
+        guard let movie = popularMovieModel?.results.first(where: {$0.id == id}) else {
             return nil
         }
+        print("got popular movie id \(movie.id)")
         return movie
     }
     
-   
-      
-    func retriveGenre(_ movie: Result,_ genre: Genre) -> [String] {
-        var array3: [String] = []
-        for id in movie.genreIDS {
-            if id == genre.id {
-                array3.append(genre.name)
-            }
+    func retrievePlayingMovieDetailt(with id: Int) -> Result? {
+       guard let movie = playingMovieModel?.results.first(where: {$0.id == id}) else {
+            return nil
         }
-        
-        return array3
+         
+        return movie
     }
     
 }
-/*
-extension MainViewModel: MovieIDDelegate {
-    func getMovieID(_ id: Int) -> Int {
-        var result = 0
-         _ = popularModel?.results.forEach({ result = $0.id })
-        return result
-    }
-    
-    
-}
-*/
