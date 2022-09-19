@@ -17,30 +17,31 @@ class MainViewController: UIViewController {
     // MARK: - Views
     
     @IBOutlet private weak var tableView: UITableView!
-    
+  
     
     // MARK: - Properties
     
     private let dataFetcher = DataFetcherService()
-    private var viewModel = MainViewModel()
+    var viewModel = MainViewModel()
     private var popularMovieDataSource: [PopularMovieCellViewModel] = []
     private var nowPlayingDataSource: [NowPlayingMovieCellViewModel] = []
-    
-   
-    
-    
         
     // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.getData()
         bindViewModel()
         configureAppearance()
      
-        
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        configureNavigationBar()
+    }
 }
+
 
 private extension MainViewController {
     
@@ -63,11 +64,23 @@ private extension MainViewController {
     
     func configureAppearance() {
         view.backgroundColor = .black
-        navigationItem.title = "Movie Collection"
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         
         configureTableView()
     }
+    
+    func configureNavigationBar() {
+        navigationItem.title = "Movie Collection"
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        
+        let searchButton = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .plain, target: self, action: #selector(didTapSearch))
+        searchButton.tintColor = .white
+        navigationItem.rightBarButtonItem = searchButton
+        
+    }
+    @objc func didTapSearch() {
+        viewModel.goToSearchViewController()
+    }
+   
     
     func configureTableView() {
         tableView.dataSource = self
@@ -89,7 +102,7 @@ private extension MainViewController {
     }
     
     func openDetail(movieID: Int) {
-        guard let movie = viewModel.retriveMovieDetails(with: movieID) else {
+        guard let movie = viewModel.retrivePopulerMovieDetails(with: movieID) else {
             return
         }
         guard let genre = viewModel.genreData else {
@@ -102,20 +115,7 @@ private extension MainViewController {
             self.navigationController?.pushViewController(detailVC, animated: true)
         }
     }
-    func openPlayngDetail(movieID: Int) {
-        guard let movie = viewModel.retrievePlayingMovieDetailt(with: movieID) else {
-            return
-        }
-        guard let genre = viewModel.genreData else {
-            return
-        }
-       
-        let detailViewModel = DetailTableCellViewModel(movie: movie, genre: genre)
-        let detailVC = DetailViewController(viewModel: detailViewModel)
-        DispatchQueue.main.async {
-            self.navigationController?.pushViewController(detailVC, animated: true)
-        }
-    }
+    
 }
 
 extension MainViewController: UITableViewDataSource, UITableViewDelegate {
@@ -138,7 +138,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
             
             cell?.didSelectMovie = { [weak self] index in
                 guard let self = self else { return }
-                self.openPlayngDetail(movieID: self.nowPlayingDataSource[index].movieID)
+                self.openDetail(movieID: self.nowPlayingDataSource[index].movieID)
             }
             return cell ?? UITableViewCell()
         } else {
@@ -174,7 +174,6 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let movieID = popularMovieDataSource[indexPath.row].movieID
-        print(movieID)
         self.openDetail(movieID: movieID)
     }
     

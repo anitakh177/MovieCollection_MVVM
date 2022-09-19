@@ -15,12 +15,12 @@ class DataFetcherService {
         self.dataFetcher = dataFetcher
     }
     
-    func fetchMovie(completion: @escaping (PopularMovie?) -> Void) {
+    func fetchPopularMovie(completion: @escaping (Movie?) -> Void) {
         let urlMovie = "https://api.themoviedb.org/3/movie/popular?api_key=62d229b93c02da4c5355f1bfe7de1181&language=en-US"
         dataFetcher.fetchGenericJSONData(urlString: urlMovie, response: completion)
     }
     
-    func fetchNowMovie(completion: @escaping(NowPlaying?) -> Void) {
+    func fetchNowMovie(completion: @escaping(Movie?) -> Void) {
         let urlMovie = "https://api.themoviedb.org/3/movie/now_playing?api_key=62d229b93c02da4c5355f1bfe7de1181&language=en-US"
         dataFetcher.fetchGenericJSONData(urlString: urlMovie, response: completion)
     }
@@ -38,6 +38,11 @@ class DataFetcherService {
     func fetchCastImage(castID: Int, completion: @escaping(CastImage?) -> Void) {
         let urlCastImage = "https://api.themoviedb.org/3/person/\(castID)/images?api_key=62d229b93c02da4c5355f1bfe7de1181"
         dataFetcher.fetchGenericJSONData(urlString: urlCastImage, response: completion)
+    }
+    
+    func searchMovie(text: String, completion: @escaping(Movie?) -> Void) {
+        let urlSearch = "https://api.themoviedb.org/3/search/movie?api_key=62d229b93c02da4c5355f1bfe7de1181&language=en-US&query=\(text)"
+        dataFetcher.fetchGenericJSONData(urlString: urlSearch, response: completion)
     }
     
     

@@ -39,54 +39,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "F693AD2E-CE2A-46F1-A89B-CE68073B6F34"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MovieCollection/MainModule/Controller/MainViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "20"
-            endingLineNumber = "20"
-            landmarkName = "MainViewController"
-            landmarkType = "3">
-            <Locations>
-               <Location
-                  uuid = "F693AD2E-CE2A-46F1-A89B-CE68073B6F34 - ffbb4f307b399a85"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "MovieCollection.MainViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; MovieCollection.MainViewController"
-                  moduleName = "MovieCollection"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/anita/Desktop/projects/Apps/MovieCollection/MovieCollection/MainModule/Controller/MainViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "15"
-                  endingLineNumber = "15"
-                  offsetFromSymbolStart = "160">
-               </Location>
-               <Location
-                  uuid = "F693AD2E-CE2A-46F1-A89B-CE68073B6F34 - 891e10af52243da"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "MovieCollection.MainViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;MovieCollection.MainViewController&gt;"
-                  moduleName = "MovieCollection"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/anita/Desktop/projects/Apps/MovieCollection/MovieCollection/MainModule/Controller/MainViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "15"
-                  endingLineNumber = "15"
-                  offsetFromSymbolStart = "136">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "45FE07DA-4A3C-429B-BDFA-57A00F35B67C"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -173,8 +125,8 @@
             filePath = "MovieCollection/DetailModule/Controller/DetailViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "90"
-            endingLineNumber = "90"
+            startingLineNumber = "93"
+            endingLineNumber = "93"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -189,8 +141,8 @@
             filePath = "MovieCollection/DetailModule/Controller/DetailViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -237,8 +189,8 @@
             filePath = "MovieCollection/MainModule/Controller/MainViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "76"
-            endingLineNumber = "76"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
             landmarkName = "configureTableView()"
             landmarkType = "7">
          </BreakpointContent>

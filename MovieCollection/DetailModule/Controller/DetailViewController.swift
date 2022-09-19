@@ -32,7 +32,7 @@ class DetailViewController: UIViewController {
         viewModel.delegateCast = self
         viewModel.getData()
         bindViewModel()
-        configureTableView()
+        configureAppearance()
        
       
     }
@@ -49,11 +49,14 @@ private extension DetailViewController {
 
         }
     }
-    
+    func configureAppearance() {
+        view.backgroundColor = .black
+        configureTableView()
+    }
     func configureTableView() {
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.backgroundColor = .white
+        tableView.backgroundColor = .black
         tableView.contentInsetAdjustmentBehavior = .never
         
         
