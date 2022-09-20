@@ -20,10 +20,11 @@ class MainViewModel: TableViewModelType {
     
    
     var sectionTitle: [String] {
-        return ["Playing Now", "Popular"]
+       return ["Playing Now", "Popular"]
     }
 
     func numberOfSections() -> Int {
+
         return sectionTitle.count
     }
     

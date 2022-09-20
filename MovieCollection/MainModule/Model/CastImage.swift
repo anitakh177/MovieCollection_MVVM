@@ -15,7 +15,9 @@ struct CastImage: Codable {
 
 // MARK: - Profile
 struct Profile: Codable {
-    let file_path: String
+    let filePath: String
 
-}
-
+    enum CodingKeys: String, CodingKey {
+        case filePath = "file_path"
+        }
+    }

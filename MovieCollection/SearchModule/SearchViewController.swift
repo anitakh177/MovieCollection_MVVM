@@ -15,10 +15,15 @@ class SearchViewController: UIViewController {
     @IBOutlet private weak var tableView: UITableView!
     private lazy var searchBar = UISearchBar()
     
+    // MARK: - Properties
+    
+    private var viewModel = SearchViewModel()
+    private var popularMovieDataSource: [PopularMovieCellViewModel] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureAppearance()
+      //  bindViewModel()
     }
    
     override func viewWillAppear(_ animated: Bool) {
@@ -36,6 +41,15 @@ class SearchViewController: UIViewController {
 
 private extension SearchViewController {
     
+    func bindViewModel() {
+        
+        viewModel.popularMovieDataSource.bind { [weak self] (result) in
+            guard let self = self, let result = result else { return }
+            self.popularMovieDataSource = result
+            //self.tableView.reloadData()
+            
+        }
+    }
     
     func setupSearchBar() {
         searchBar = UISearchBar(frame: CGRect(x: 56, y: 0, width: 300, height: 32))
@@ -66,10 +80,45 @@ private extension SearchViewController {
     }
     
     func configureTableView(){
+        tableView.register(UINib(nibName: "\(PopularMovieTableViewCell.self)" , bundle: .main), forCellReuseIdentifier: "\(PopularMovieTableViewCell.self)")
+        
         tableView.backgroundColor = .black
+        tableView.rowHeight = 130
+        tableView.delegate = self
+        tableView.dataSource = self
     }
+    
 }
 
 extension SearchViewController: UISearchBarDelegate {
+    
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        return true
+    }
+    
+   func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        viewModel.getData(for: searchText)
+        bindViewModel()
+        tableView.reloadData()
+    }
+   
+}
+
+extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.numberOfRows()
+       
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "\(PopularMovieTableViewCell.self)", for: indexPath) as? PopularMovieTableViewCell
+        let viewModel = popularMovieDataSource[indexPath.row]
+        cell?.configureCellData(viewModel: viewModel)
+   
+        return cell ?? UITableViewCell()
+    }
+    
+
     
 }

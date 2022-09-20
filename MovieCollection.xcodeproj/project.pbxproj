@@ -23,6 +23,8 @@
 		08323B8A28CB4C1300984508 /* ImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08323B8828CB4C1300984508 /* ImageTableViewCell.swift */; };
 		08323B8B28CB4C1300984508 /* ImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08323B8928CB4C1300984508 /* ImageTableViewCell.xib */; };
 		08323B8F28CB55B200984508 /* DetailTableCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08323B8E28CB55B200984508 /* DetailTableCellViewModel.swift */; };
+		0848CEB828D97CB7009A1018 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0848CEB728D97CB7009A1018 /* SearchViewModel.swift */; };
+		0848CEBB28D99CD8009A1018 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 0848CEBA28D99CD8009A1018 /* SDWebImage */; };
 		085A6DE928CF3F1A00C97196 /* OverviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085A6DE728CF3F1A00C97196 /* OverviewTableViewCell.swift */; };
 		085A6DEA28CF3F1A00C97196 /* OverviewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 085A6DE828CF3F1A00C97196 /* OverviewTableViewCell.xib */; };
 		085A6DEC28CF429A00C97196 /* Cast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085A6DEB28CF429A00C97196 /* Cast.swift */; };
@@ -50,13 +52,14 @@
 		08CC6D8128C767E000D05968 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CC6D8028C767E000D05968 /* Movie.swift */; };
 		08D95DF728D5B63A006A7280 /* PlayingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D95DF528D5B63A006A7280 /* PlayingTableViewCell.swift */; };
 		08D95DF828D5B63A006A7280 /* PlayingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08D95DF628D5B63A006A7280 /* PlayingTableViewCell.xib */; };
-		08D95DFB28D628B4006A7280 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 08D95DFA28D628B4006A7280 /* SDWebImage */; };
 		08E1643728D835560034818C /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E1643628D835560034818C /* Coordinator.swift */; };
 		08E1643C28D83D0C0034818C /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E1643A28D83D0C0034818C /* SearchViewController.swift */; };
 		08E1643D28D83D0C0034818C /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08E1643B28D83D0C0034818C /* SearchViewController.xib */; };
+		736FB3EDAD64E5B5DFF30C3A /* Pods_MovieCollection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCCEF7C1277327DE6E0FCC84 /* Pods_MovieCollection.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		031AFCCD6BBD709D661752CF /* Pods-MovieCollection.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieCollection.debug.xcconfig"; path = "Target Support Files/Pods-MovieCollection/Pods-MovieCollection.debug.xcconfig"; sourceTree = "<group>"; };
 		0824100428CC969A003A3D92 /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
 		082EC07A28C872040023F99A /* ConstantsInset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantsInset.swift; sourceTree = "<group>"; };
 		082EC07C28C896D10023F99A /* PopularMovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMovieTableViewCell.swift; sourceTree = "<group>"; };
@@ -73,6 +76,7 @@
 		08323B8828CB4C1300984508 /* ImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTableViewCell.swift; sourceTree = "<group>"; };
 		08323B8928CB4C1300984508 /* ImageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageTableViewCell.xib; sourceTree = "<group>"; };
 		08323B8E28CB55B200984508 /* DetailTableCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableCellViewModel.swift; sourceTree = "<group>"; };
+		0848CEB728D97CB7009A1018 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		085A6DE728CF3F1A00C97196 /* OverviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewTableViewCell.swift; sourceTree = "<group>"; };
 		085A6DE828CF3F1A00C97196 /* OverviewTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OverviewTableViewCell.xib; sourceTree = "<group>"; };
 		085A6DEB28CF429A00C97196 /* Cast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cast.swift; sourceTree = "<group>"; };
@@ -105,6 +109,8 @@
 		08E1643628D835560034818C /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		08E1643A28D83D0C0034818C /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		08E1643B28D83D0C0034818C /* SearchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchViewController.xib; sourceTree = "<group>"; };
+		10E39DC44FE3E0112DDCAFFE /* Pods-MovieCollection.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieCollection.release.xcconfig"; path = "Target Support Files/Pods-MovieCollection/Pods-MovieCollection.release.xcconfig"; sourceTree = "<group>"; };
+		CCCEF7C1277327DE6E0FCC84 /* Pods_MovieCollection.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MovieCollection.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,7 +118,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				08D95DFB28D628B4006A7280 /* SDWebImage in Frameworks */,
+				0848CEBB28D99CD8009A1018 /* SDWebImage in Frameworks */,
+				736FB3EDAD64E5B5DFF30C3A /* Pods_MovieCollection.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -199,6 +206,14 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		0848CEB628D97CA0009A1018 /* SearchViewModule */ = {
+			isa = PBXGroup;
+			children = (
+				0848CEB728D97CB7009A1018 /* SearchViewModel.swift */,
+			);
+			path = SearchViewModule;
+			sourceTree = "<group>";
+		};
 		088CD00C28D05276000DDABA /* CollectionCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -253,6 +268,8 @@
 			children = (
 				08CC6D6128C75C8300D05968 /* MovieCollection */,
 				08CC6D6028C75C8300D05968 /* Products */,
+				0CEF4D92FC7D85C3256CE7B6 /* Pods */,
+				1E32DDA5A8B75E4E7CF0E2F5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -335,10 +352,28 @@
 		08E1643928D83CD00034818C /* SearchModule */ = {
 			isa = PBXGroup;
 			children = (
+				0848CEB628D97CA0009A1018 /* SearchViewModule */,
 				08E1643A28D83D0C0034818C /* SearchViewController.swift */,
 				08E1643B28D83D0C0034818C /* SearchViewController.xib */,
 			);
 			path = SearchModule;
+			sourceTree = "<group>";
+		};
+		0CEF4D92FC7D85C3256CE7B6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				031AFCCD6BBD709D661752CF /* Pods-MovieCollection.debug.xcconfig */,
+				10E39DC44FE3E0112DDCAFFE /* Pods-MovieCollection.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		1E32DDA5A8B75E4E7CF0E2F5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CCCEF7C1277327DE6E0FCC84 /* Pods_MovieCollection.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -348,6 +383,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 08CC6D7328C75C8500D05968 /* Build configuration list for PBXNativeTarget "MovieCollection" */;
 			buildPhases = (
+				0848CEBC28D9CCDF009A1018 /* ShellScript */,
+				E1CFB6F4FFE24A2399088063 /* [CP] Check Pods Manifest.lock */,
 				08CC6D5B28C75C8300D05968 /* Sources */,
 				08CC6D5C28C75C8300D05968 /* Frameworks */,
 				08CC6D5D28C75C8300D05968 /* Resources */,
@@ -358,7 +395,7 @@
 			);
 			name = MovieCollection;
 			packageProductDependencies = (
-				08D95DFA28D628B4006A7280 /* SDWebImage */,
+				0848CEBA28D99CD8009A1018 /* SDWebImage */,
 			);
 			productName = MovieCollection;
 			productReference = 08CC6D5F28C75C8300D05968 /* MovieCollection.app */;
@@ -389,7 +426,7 @@
 			);
 			mainGroup = 08CC6D5628C75C8300D05968;
 			packageReferences = (
-				08D95DF928D628B4006A7280 /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				0848CEB928D99CD8009A1018 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 			);
 			productRefGroup = 08CC6D6028C75C8300D05968 /* Products */;
 			projectDirPath = "";
@@ -424,11 +461,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0848CEBC28D9CCDF009A1018 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "${PODS_ROOT}/SwiftLint/swiftlint\n";
+		};
+		E1CFB6F4FFE24A2399088063 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MovieCollection-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		08CC6D5B28C75C8300D05968 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0848CEB828D97CB7009A1018 /* SearchViewModel.swift in Sources */,
 				085A6DE928CF3F1A00C97196 /* OverviewTableViewCell.swift in Sources */,
 				08323B8A28CB4C1300984508 /* ImageTableViewCell.swift in Sources */,
 				082EC07E28C896D10023F99A /* PopularMovieTableViewCell.swift in Sources */,
@@ -594,6 +674,7 @@
 		};
 		08CC6D7428C75C8500D05968 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 031AFCCD6BBD709D661752CF /* Pods-MovieCollection.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -621,6 +702,7 @@
 		};
 		08CC6D7528C75C8500D05968 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 10E39DC44FE3E0112DDCAFFE /* Pods-MovieCollection.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -670,7 +752,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		08D95DF928D628B4006A7280 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+		0848CEB928D99CD8009A1018 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SDWebImage/SDWebImage";
 			requirement = {
@@ -681,9 +763,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		08D95DFA28D628B4006A7280 /* SDWebImage */ = {
+		0848CEBA28D99CD8009A1018 /* SDWebImage */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 08D95DF928D628B4006A7280 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			package = 0848CEB928D99CD8009A1018 /* XCRemoteSwiftPackageReference "SDWebImage" */;
 			productName = SDWebImage;
 		};
 /* End XCSwiftPackageProductDependency section */
