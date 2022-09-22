@@ -18,7 +18,6 @@ class MainViewController: UIViewController {
     
     @IBOutlet private weak var tableView: UITableView!
   
-    
     // MARK: - Properties
     
     private let dataFetcher = DataFetcherService()
@@ -42,7 +41,6 @@ class MainViewController: UIViewController {
     }
 }
 
-
 private extension MainViewController {
     
     func bindViewModel() {
@@ -57,8 +55,6 @@ private extension MainViewController {
             self.reloadTableView()
             
         }
-        
-     
       
     }
     
@@ -80,7 +76,6 @@ private extension MainViewController {
     @objc func didTapSearch() {
         viewModel.goToSearchViewController()
     }
-   
     
     func configureTableView() {
         tableView.dataSource = self
@@ -89,8 +84,6 @@ private extension MainViewController {
         tableView.register(UINib(nibName: "\(PlayingTableViewCell.self)", bundle: .main), forCellReuseIdentifier: "\(PlayingTableViewCell.self)")
         
         tableView.register(UINib(nibName: "\(PopularMovieTableViewCell.self)", bundle: .main), forCellReuseIdentifier: "\(PopularMovieTableViewCell.self)")
-        
-        
         
     }
     
@@ -109,10 +102,11 @@ private extension MainViewController {
             return
         }
        
-        let detailViewModel = DetailTableCellViewModel(movie: movie, genre: genre)
-        let detailVC = DetailViewController(viewModel: detailViewModel)
+        let detailCellViewModel = DetailTableCellViewModel(movie: movie, genre: genre)
+        let detailViewController = DetailViewController()
+        detailViewController.cellViewModel = detailCellViewModel
         DispatchQueue.main.async {
-            self.navigationController?.pushViewController(detailVC, animated: true)
+            self.navigationController?.pushViewController(detailViewController, animated: true)
         }
     }
     
@@ -149,8 +143,6 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
             return cell ?? UITableViewCell()
         }
         
-       
-       
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -178,5 +170,3 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
 }
-
-

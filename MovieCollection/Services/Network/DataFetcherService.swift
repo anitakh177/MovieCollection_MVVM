@@ -46,5 +46,4 @@ class DataFetcherService {
         dataFetcher.fetchGenericJSONData(urlString: urlSearch, response: completion)
     }
     
-    
 }

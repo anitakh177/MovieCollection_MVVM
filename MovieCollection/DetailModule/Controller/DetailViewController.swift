@@ -14,18 +14,9 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     // MARK: - Properties
-    
-    var viewModel: DetailTableCellViewModel
+    var viewModel = DetailTableViewModel()
+    var cellViewModel: DetailTableCellViewModel?
     var castCellDataSource: [CastCollectionViewModel] = []
-    
-    init(viewModel: DetailTableCellViewModel) {
-        self.viewModel = viewModel
-        super.init(nibName: "DetailViewController", bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +24,6 @@ class DetailViewController: UIViewController {
         viewModel.getData()
         bindViewModel()
         configureAppearance()
-       
       
     }
 
@@ -57,16 +47,13 @@ private extension DetailViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundColor = .black
-        tableView.contentInsetAdjustmentBehavior = .never
-        
         
         tableView.register(UINib(nibName: "\(ImageTableViewCell.self)", bundle: .main), forCellReuseIdentifier: "\(ImageTableViewCell.self)")
         tableView.register(UINib(nibName: "\(TitleTableViewCell.self)", bundle: .main), forCellReuseIdentifier: "\(TitleTableViewCell.self)")
-        tableView.register(UINib(nibName: "\(ParametersTableViewCell.self)" , bundle: .main), forCellReuseIdentifier: "\(ParametersTableViewCell.self)")
+        tableView.register(UINib(nibName: "\(ParametersTableViewCell.self)", bundle: .main), forCellReuseIdentifier: "\(ParametersTableViewCell.self)")
         tableView.register(UINib(nibName: "\(OverviewTableViewCell.self)", bundle: .main), forCellReuseIdentifier: "\(OverviewTableViewCell.self)")
         tableView.register(UINib(nibName: "\(CastTableViewCell.self)", bundle: .main), forCellReuseIdentifier: "\(CastTableViewCell.self)")
 
-        
     }
 }
 
@@ -78,27 +65,27 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         switch indexPath.row {
-            case 0:
-                let cell = tableView.dequeueReusableCell(withIdentifier:  "\(ImageTableViewCell.self)", for: indexPath) as? ImageTableViewCell
-                    cell?.configureCellData(viewModel: viewModel)
+        case 0:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "\(ImageTableViewCell.self)", for: indexPath) as? ImageTableViewCell
+            cell?.configureCellData(viewModel: cellViewModel!)
             
                 return cell ?? UITableViewCell()
         
-            case 1:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "\(TitleTableViewCell.self)", for: indexPath) as? TitleTableViewCell
-                    cell?.configureCellData(with: viewModel)
+        case 1:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "\(TitleTableViewCell.self)", for: indexPath) as? TitleTableViewCell
+            cell?.configureCellData(with: cellViewModel!)
             
                 return cell ?? UITableViewCell()
             
-            case 2:
+        case 2:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "\(ParametersTableViewCell.self)", for: indexPath) as? ParametersTableViewCell
-                   cell?.configureCellData(viewModel: viewModel)
+            cell?.configureCellData(viewModel: cellViewModel!)
             
                 return cell ?? UITableViewCell()
-            case 3:
+        case 3:
             
-                let cell = tableView.dequeueReusableCell(withIdentifier: "\(OverviewTableViewCell.self)", for: indexPath) as? OverviewTableViewCell
-                    cell?.configureCellData(viewModel: viewModel)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "\(OverviewTableViewCell.self)", for: indexPath) as? OverviewTableViewCell
+            cell?.configureCellData(viewModel: cellViewModel!)
             
                 return cell ?? UITableViewCell()
            
@@ -107,7 +94,7 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
             cell?.updateCell(with: castCellDataSource)
             return cell ?? UITableViewCell()
             
-            default:
+        default:
                 return UITableViewCell()
         
             }
@@ -126,7 +113,6 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
      
     }
     
-    
 }
 
 extension DetailViewController: FetchCast {
@@ -135,10 +121,7 @@ extension DetailViewController: FetchCast {
     }
     
     func getMovieID() -> Int {
-        return viewModel.id
+        return cellViewModel!.id
     }
-    
    
 }
-
-

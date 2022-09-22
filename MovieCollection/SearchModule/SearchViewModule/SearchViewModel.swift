@@ -18,7 +18,6 @@ class SearchViewModel {
         return movieModel?.results.count ?? 0
     }
     
-    
     func getData(for text: String) {
         DispatchQueue.global(qos: .utility).async {
             

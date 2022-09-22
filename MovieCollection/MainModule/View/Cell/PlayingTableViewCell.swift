@@ -18,11 +18,11 @@ class PlayingTableViewCell: UITableViewCell {
         
     // MARK: - Events
         
-        var didSelectMovie: ((Int) -> ())?
+        var didSelectMovie: ((Int) -> Void)?
             
         override func awakeFromNib() {
             super.awakeFromNib()
-            collectionView.register(UINib(nibName: "\(MovieCollectionViewCell.self)", bundle: .main), forCellWithReuseIdentifier:  "\(MovieCollectionViewCell.self)")
+            collectionView.register(UINib(nibName: "\(MovieCollectionViewCell.self)", bundle: .main), forCellWithReuseIdentifier: "\(MovieCollectionViewCell.self)")
             collectionView.delegate = self
             collectionView.dataSource = self
                 
@@ -39,8 +39,6 @@ class PlayingTableViewCell: UITableViewCell {
         }
         
     }
-        
-            
 
     extension PlayingTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
         func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -68,7 +66,4 @@ class PlayingTableViewCell: UITableViewCell {
           
         }
             
-            
     }
-
-

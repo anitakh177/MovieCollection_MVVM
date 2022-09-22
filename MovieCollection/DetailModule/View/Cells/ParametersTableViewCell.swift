@@ -15,7 +15,6 @@ class ParametersTableViewCell: UITableViewCell {
     @IBOutlet private weak var languageLabel: UILabel!
     @IBOutlet private weak var durationLabel: UILabel!
     
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

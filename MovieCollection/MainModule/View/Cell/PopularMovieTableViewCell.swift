@@ -34,9 +34,7 @@ class PopularMovieTableViewCell: UITableViewCell {
         genreLabel.text = viewModel.genres
        
         movieImageView.sd_setImage(with: viewModel.image)
-     
         
     }
-    
     
 }

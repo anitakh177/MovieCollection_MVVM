@@ -17,7 +17,7 @@ class CastTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        collectionView.register(UINib(nibName: "\(CastCollectionViewCell.self)", bundle: .main), forCellWithReuseIdentifier:  "\(CastCollectionViewCell.self)")
+        collectionView.register(UINib(nibName: "\(CastCollectionViewCell.self)", bundle: .main), forCellWithReuseIdentifier: "\(CastCollectionViewCell.self)")
         collectionView.delegate = self
         collectionView.dataSource = self
     }
@@ -33,7 +33,6 @@ class CastTableViewCell: UITableViewCell {
         collectionView.reloadData()
     }
     
-    
 }
 // MARK: - CollectionView
 
@@ -44,7 +43,7 @@ extension CastTableViewCell: UICollectionViewDelegate, UICollectionViewDataSourc
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier:  "\(CastCollectionViewCell.self)", for: indexPath) as? CastCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "\(CastCollectionViewCell.self)", for: indexPath) as? CastCollectionViewCell
         let viewModel = castCellDataSource[indexPath.row]
         cell?.configureCellData(viewModel: viewModel)
         

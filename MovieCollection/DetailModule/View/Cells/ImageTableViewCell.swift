@@ -14,7 +14,6 @@ class ImageTableViewCell: UITableViewCell {
     @IBOutlet private weak var movieImage: UIImageView!
     @IBOutlet private weak var roundedCornerView: UIView!
     
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         configureAppearance()

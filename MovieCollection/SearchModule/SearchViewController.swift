@@ -32,8 +32,6 @@ class SearchViewController: UIViewController {
         searchBar.becomeFirstResponder()
       
     }
-
-
    
 }
 
@@ -46,7 +44,7 @@ private extension SearchViewController {
         viewModel.popularMovieDataSource.bind { [weak self] (result) in
             guard let self = self, let result = result else { return }
             self.popularMovieDataSource = result
-            //self.tableView.reloadData()
+            // self.tableView.reloadData()
             
         }
     }
@@ -54,7 +52,7 @@ private extension SearchViewController {
     func setupSearchBar() {
         searchBar = UISearchBar(frame: CGRect(x: 56, y: 0, width: 300, height: 32))
         searchBar.searchTextField.backgroundColor = .darkGray
-        searchBar.searchTextField.attributedPlaceholder =  NSAttributedString(string: "Search", attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray])
+        searchBar.searchTextField.attributedPlaceholder =  NSAttributedString(string: "Search", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         searchBar.searchTextField.textColor = .white
         searchBar.layer.cornerRadius = 32/2
         searchBar.clipsToBounds = true
@@ -79,8 +77,8 @@ private extension SearchViewController {
         setupSearchBar()
     }
     
-    func configureTableView(){
-        tableView.register(UINib(nibName: "\(PopularMovieTableViewCell.self)" , bundle: .main), forCellReuseIdentifier: "\(PopularMovieTableViewCell.self)")
+    func configureTableView() {
+        tableView.register(UINib(nibName: "\(PopularMovieTableViewCell.self)", bundle: .main), forCellReuseIdentifier: "\(PopularMovieTableViewCell.self)")
         
         tableView.backgroundColor = .black
         tableView.rowHeight = 130
@@ -118,7 +116,5 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
    
         return cell ?? UITableViewCell()
     }
-    
-
     
 }

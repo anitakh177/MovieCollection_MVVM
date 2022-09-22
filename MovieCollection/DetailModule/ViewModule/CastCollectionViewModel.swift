@@ -22,5 +22,4 @@ class CastCollectionViewModel: CellViewModelType {
            URL(string: "https://image.tmdb.org/t/p/w500/\(imageCode)")
     }
     
-    
 }

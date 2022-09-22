@@ -23,14 +23,13 @@ class PopularMovieCellViewModel: CellViewModelType {
         self.releaseDate = movie.releaseDate
         self.genres = getGenre(genreIds: movie.genreIDS, genreData: genre)
         self.image = makeImageURL(movie.posterPath)
-      
         
     }
     
     func makeImageURL(_ imageCode: String) -> URL? {
        URL(string: "https://image.tmdb.org/t/p/w500/\(imageCode)")
     }
-    func getGenre(genreIds : [Int], genreData: GenreData?) -> String {
+    func getGenre(genreIds: [Int], genreData: GenreData?) -> String {
                 var genreString = ""
                 for genreId in genreIds {
                     if let geners = (genreData?.genres) {

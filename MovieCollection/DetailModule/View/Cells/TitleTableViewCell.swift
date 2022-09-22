@@ -30,7 +30,4 @@ class TitleTableViewCell: UITableViewCell {
         genreLabel.text = viewModel.genres
     }
     
-    
-    
-    
 }

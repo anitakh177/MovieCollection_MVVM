@@ -17,7 +17,6 @@ class MainViewModel: TableViewModelType {
    var genreData: GenreData?
    var playingMovieDataSource: Observable<[NowPlayingMovieCellViewModel]> = Observable(nil)
    var popularMovieDataSource: Observable<[PopularMovieCellViewModel]> = Observable(nil)
-    
    
     var sectionTitle: [String] {
        return ["Playing Now", "Popular"]
@@ -31,8 +30,6 @@ class MainViewModel: TableViewModelType {
     func numberOfRows(in section: Int) -> Int {
         return movieModel?.results.count ?? 0
     }
-    
-   
     
     func getData() {
         
@@ -48,7 +45,6 @@ class MainViewModel: TableViewModelType {
             self?.movieModel = result
             self?.mapNowPlayingMovieData()
         }
-        
         
         dataFetchService.fetchPopularMovie { [weak self] (result) in
             self?.movieModel = result
@@ -74,7 +70,6 @@ class MainViewModel: TableViewModelType {
        
     }
 
-    
     func retrivePopulerMovieDetails(with id: Int) -> Result? {
         guard let movie = movieModel?.results.first(where: {$0.id == id}) else {
             return nil

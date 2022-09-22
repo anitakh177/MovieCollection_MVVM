@@ -19,7 +19,7 @@ class NetworkDataFetcher: DataFetcher {
         self.networking = networking
     }
     
-    func fetchGenericJSONData<T>(urlString: String, response: @escaping (T?) -> Void) where T : Decodable {
+    func fetchGenericJSONData<T>(urlString: String, response: @escaping (T?) -> Void) where T: Decodable {
         print(T.self)
         networking.request(urlString: urlString) { (data, error) in
             if let error = error {
