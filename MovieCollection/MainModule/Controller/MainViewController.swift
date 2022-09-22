@@ -7,11 +7,6 @@
 
 import UIKit
 
-protocol FetchCast: AnyObject {
-    func getMovieID() -> Int
-    func getPersonID() -> [Int]
-}
-
 class MainViewController: UIViewController {
 
     // MARK: - Views
@@ -81,8 +76,8 @@ private extension MainViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.backgroundColor = .black
-        tableView.register(UINib(nibName: "\(PlayingTableViewCell.self)", bundle: .main), forCellReuseIdentifier: "\(PlayingTableViewCell.self)")
         
+        tableView.register(UINib(nibName: "\(PlayingTableViewCell.self)", bundle: .main), forCellReuseIdentifier: "\(PlayingTableViewCell.self)")
         tableView.register(UINib(nibName: "\(PopularMovieTableViewCell.self)", bundle: .main), forCellReuseIdentifier: "\(PopularMovieTableViewCell.self)")
         
     }

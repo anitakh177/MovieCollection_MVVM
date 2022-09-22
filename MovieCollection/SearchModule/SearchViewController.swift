@@ -18,12 +18,18 @@ class SearchViewController: UIViewController {
     // MARK: - Properties
     
     private var viewModel = SearchViewModel()
-    private var popularMovieDataSource: [PopularMovieCellViewModel] = []
+    private var popularMovieDataSource: [PopularMovieCellViewModel] = [] {
+        didSet {
+            if popularMovieDataSource.isEmpty {
+                backgroundLabel.isHidden = false
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureAppearance()
-      //  bindViewModel()
+      
     }
    
     override func viewWillAppear(_ animated: Bool) {
@@ -44,7 +50,7 @@ private extension SearchViewController {
         viewModel.popularMovieDataSource.bind { [weak self] (result) in
             guard let self = self, let result = result else { return }
             self.popularMovieDataSource = result
-            // self.tableView.reloadData()
+             self.tableView.reloadData()
             
         }
     }
@@ -95,9 +101,18 @@ extension SearchViewController: UISearchBarDelegate {
     }
     
    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        viewModel.getData(for: searchText)
-        bindViewModel()
-        tableView.reloadData()
+       popularMovieDataSource = []
+       if searchText.isEmpty {
+           backgroundLabel.isHidden = false
+           tableView.isHidden = true
+       } else {
+           tableView.isHidden = false
+           backgroundLabel.isHidden = true
+           viewModel.getData(for: searchText)
+           bindViewModel()
+          
+       }
+       tableView.reloadData()
     }
    
 }
@@ -110,11 +125,15 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "\(PopularMovieTableViewCell.self)", for: indexPath) as? PopularMovieTableViewCell
-        let viewModel = popularMovieDataSource[indexPath.row]
-        cell?.configureCellData(viewModel: viewModel)
-   
-        return cell ?? UITableViewCell()
+         let cell = tableView.dequeueReusableCell(withIdentifier: "\(PopularMovieTableViewCell.self)", for: indexPath)
+        
+        if let cell = cell as? PopularMovieTableViewCell {
+            if popularMovieDataSource.isEmpty == false {
+                let viewModel = popularMovieDataSource[indexPath.row]
+                cell.configureCellData(viewModel: viewModel)
+            }
+        }
+            return cell
     }
     
 }

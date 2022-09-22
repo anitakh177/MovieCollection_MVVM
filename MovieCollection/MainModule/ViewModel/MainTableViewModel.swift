@@ -8,22 +8,26 @@
 import Foundation
 
 class MainViewModel: TableViewModelType {
+    
+    // MARK: - Properties
+
+    let dataFetchService = DataFetcherService()
+    private var movieModel: Movie?
+    var genreData: GenreData?
+    var playingMovieDataSource: Observable<[NowPlayingMovieCellViewModel]> = Observable(nil)
+    var popularMovieDataSource: Observable<[PopularMovieCellViewModel]> = Observable(nil)
+    
+    var sectionTitle: [String] {
+        return ["Playing Now", "Popular"]
+    }
+    
+    // MARK: - Delegate
+    
     weak var appCoordinator: AppCoordinator!
     
-    let dataFetchService = DataFetcherService()
+    // MARK: - Methods
     
- //  private var playingMovieModel: NowPlaying?
-   private var movieModel: Movie?
-   var genreData: GenreData?
-   var playingMovieDataSource: Observable<[NowPlayingMovieCellViewModel]> = Observable(nil)
-   var popularMovieDataSource: Observable<[PopularMovieCellViewModel]> = Observable(nil)
-   
-    var sectionTitle: [String] {
-       return ["Playing Now", "Popular"]
-    }
-
     func numberOfSections() -> Int {
-
         return sectionTitle.count
     }
     
@@ -39,7 +43,7 @@ class MainViewModel: TableViewModelType {
             self?.genreData = result
             dispatchGroup.leave()
         }
-       
+        
         dispatchGroup.enter()
         dataFetchService.fetchNowMovie { [weak self] (result) in
             self?.movieModel = result
@@ -54,22 +58,9 @@ class MainViewModel: TableViewModelType {
         
         dispatchGroup.notify(queue: DispatchQueue.main) {
         }
-      
-    }
-    
-    private func mapNowPlayingMovieData() {
-        playingMovieDataSource.value = self.movieModel?.results.compactMap({NowPlayingMovieCellViewModel(movie: $0)
-        })
-    }
-    
-    private func mapPopularMovieData() {
-        guard let genreData = genreData else { return  }
         
-        popularMovieDataSource.value = self.movieModel?.results.compactMap({ PopularMovieCellViewModel(movie: $0, genre: genreData)
-        })
-       
     }
-
+    
     func retrivePopulerMovieDetails(with id: Int) -> Result? {
         guard let movie = movieModel?.results.first(where: {$0.id == id}) else {
             return nil
@@ -77,7 +68,25 @@ class MainViewModel: TableViewModelType {
         return movie
     }
     
-     func goToSearchViewController() {
+    func goToSearchViewController() {
         appCoordinator.goToSearchViewController()
     }
+}
+
+// MARK: - Private Methods
+
+private extension MainViewModel {
+    
+    func mapNowPlayingMovieData() {
+       playingMovieDataSource.value = self.movieModel?.results.compactMap({NowPlayingMovieCellViewModel(movie: $0)
+       })
+   }
+   
+    func mapPopularMovieData() {
+       guard let genreData = genreData else { return  }
+       
+       popularMovieDataSource.value = self.movieModel?.results.compactMap({ PopularMovieCellViewModel(movie: $0, genre: genreData)
+       })
+       
+   }
 }

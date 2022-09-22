@@ -12,5 +12,4 @@ protocol TableViewModelType {
     func numberOfSections() -> Int
     func getData()
     
-    var sectionTitle: [String] { get }
 }

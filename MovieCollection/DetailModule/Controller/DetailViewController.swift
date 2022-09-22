@@ -7,6 +7,11 @@
 
 import UIKit
 
+protocol FetchCast: AnyObject {
+    func getMovieID() -> Int
+    func getPersonID() -> [Int]
+}
+
 class DetailViewController: UIViewController {
 
     // MARK: - Views
@@ -26,6 +31,11 @@ class DetailViewController: UIViewController {
         configureAppearance()
       
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        configureNavigationBar()
+    }
 
 }
 
@@ -42,6 +52,7 @@ private extension DetailViewController {
     func configureAppearance() {
         view.backgroundColor = .black
         configureTableView()
+        
     }
     func configureTableView() {
         tableView.delegate = self
@@ -55,11 +66,34 @@ private extension DetailViewController {
         tableView.register(UINib(nibName: "\(CastTableViewCell.self)", bundle: .main), forCellReuseIdentifier: "\(CastTableViewCell.self)")
 
     }
+    
+    func configureNavigationBar() {
+        navigationItem.title = "Movie Collection"
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        
+        let searchButton = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .plain, target: self, action: #selector(didTapSearch))
+        searchButton.tintColor = .white
+        navigationItem.rightBarButtonItem = searchButton
+        let leftNavBar = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(closeSearchVC))
+        leftNavBar.tintColor = .white
+        
+        navigationItem.leftBarButtonItem = leftNavBar
+    }
+    @objc func closeSearchVC() {
+        navigationController?.popViewController(animated: true)
+    
+    }
+    @objc func didTapSearch() {
+         viewModel.goToSearchViewController()
+    }
 }
 
 extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        viewModel.numberOfSections()
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.numberOfRows()
+        return viewModel.numberOfRows(in: section)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -117,7 +151,9 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
 
 extension DetailViewController: FetchCast {
     func getPersonID() -> [Int] {
-        return []
+        let id = castCellDataSource.compactMap({$0.personID})
+        print(id)
+        return id
     }
     
     func getMovieID() -> Int {

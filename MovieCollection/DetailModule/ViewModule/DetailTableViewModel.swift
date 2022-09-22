@@ -7,20 +7,31 @@
 
 import Foundation
 
-class DetailTableViewModel {
+class DetailTableViewModel: TableViewModelType {
 
-var castCellView: Observable<[CastCollectionViewModel]> = Observable(nil)
+    // MARK: - Properties
+    var castCellView: Observable<[CastCollectionViewModel]> = Observable(nil)
 
-private let dataFetchService = DataFetcherService()
-private var castData: Cast?
-private var castImageData: CastImage?
-weak var delegateCast: FetchCast?
-
-func numberOfRows() -> Int {
-   return 5
-}
-
-func getData() {
+    private let dataFetchService = DataFetcherService()
+    private var castData: Cast?
+    private var castImageData: CastImage?
+    
+    // MARK: - Delegate
+    
+    weak var appCoordinator: AppCoordinator!
+    weak var delegateCast: FetchCast?
+    
+    // MARK: - Methods
+    
+    func numberOfRows(in section: Int) -> Int {
+        return 5
+    }
+    
+    func numberOfSections() -> Int {
+        return 1
+    }
+    
+    func getData() {
     let dispatchGroup = DispatchGroup()
     
     guard let movieID = delegateCast?.getMovieID() else { return }
@@ -35,12 +46,13 @@ func getData() {
     guard let personID = delegateCast?.getPersonID() else { return }
     
     _ = DispatchQueue.global(qos: .userInitiated)
-    
-    DispatchQueue.concurrentPerform(iterations: personID.count) { index in
+        
+        DispatchQueue.concurrentPerform(iterations: personID.count) { index in
         let id = personID[index]
         dispatchGroup.enter()
         dataFetchService.fetchCastImage(castID: id) { [weak self] (result) in
             self?.castImageData = result
+           // print(self?.castImageData)
             dispatchGroup.leave()
         }
      
@@ -51,9 +63,14 @@ func getData() {
     
 }
 
-private func mapCastCell() {
-    castCellView.value = self.castData?.cast.compactMap({CastCollectionViewModel(cast: $0)})
-    
-        }
- 
+    func goToSearchViewController() {
+        appCoordinator.goToSearchViewController()
     }
+    
+}
+
+private extension DetailTableViewModel {
+    func mapCastCell() {
+        castCellView.value = self.castData?.cast.compactMap({CastCollectionViewModel(cast: $0)})
+    }
+}

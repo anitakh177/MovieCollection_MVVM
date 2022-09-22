@@ -55,6 +55,7 @@
 		08E1643C28D83D0C0034818C /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E1643A28D83D0C0034818C /* SearchViewController.swift */; };
 		08E1643D28D83D0C0034818C /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08E1643B28D83D0C0034818C /* SearchViewController.xib */; };
 		08E9835128DC1FE9001C1E2C /* DetailTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E9835028DC1FE9001C1E2C /* DetailTableViewModel.swift */; };
+		08E9835428DC3D0E001C1E2C /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E9835328DC3D0E001C1E2C /* String.swift */; };
 		736FB3EDAD64E5B5DFF30C3A /* Pods_MovieCollection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCCEF7C1277327DE6E0FCC84 /* Pods_MovieCollection.framework */; };
 /* End PBXBuildFile section */
 
@@ -109,6 +110,7 @@
 		08E1643A28D83D0C0034818C /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		08E1643B28D83D0C0034818C /* SearchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchViewController.xib; sourceTree = "<group>"; };
 		08E9835028DC1FE9001C1E2C /* DetailTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewModel.swift; sourceTree = "<group>"; };
+		08E9835328DC3D0E001C1E2C /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		10E39DC44FE3E0112DDCAFFE /* Pods-MovieCollection.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieCollection.release.xcconfig"; path = "Target Support Files/Pods-MovieCollection/Pods-MovieCollection.release.xcconfig"; sourceTree = "<group>"; };
 		CCCEF7C1277327DE6E0FCC84 /* Pods_MovieCollection.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MovieCollection.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -147,6 +149,7 @@
 		082EC08D28C8D83B0023F99A /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				08E9835328DC3D0E001C1E2C /* String.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -154,9 +157,9 @@
 		08323B7F28CB4A6800984508 /* DetailModule */ = {
 			isa = PBXGroup;
 			children = (
+				08323B8028CB4A7D00984508 /* Controller */,
 				08323B8228CB4A8C00984508 /* ViewModule */,
 				08323B8128CB4A8500984508 /* View */,
-				08323B8028CB4A7D00984508 /* Controller */,
 			);
 			path = DetailModule;
 			sourceTree = "<group>";
@@ -181,9 +184,9 @@
 		08323B8228CB4A8C00984508 /* ViewModule */ = {
 			isa = PBXGroup;
 			children = (
+				08E9835028DC1FE9001C1E2C /* DetailTableViewModel.swift */,
 				08323B8E28CB55B200984508 /* DetailTableCellViewModel.swift */,
 				088CD01128D06799000DDABA /* CastCollectionViewModel.swift */,
-				08E9835028DC1FE9001C1E2C /* DetailTableViewModel.swift */,
 			);
 			path = ViewModule;
 			sourceTree = "<group>";
@@ -286,7 +289,7 @@
 			children = (
 				08CC6D6428C75C8300D05968 /* SceneDelegate.swift */,
 				08CC6D6228C75C8300D05968 /* AppDelegate.swift */,
-				08E1643628D835560034818C /* Coordinator.swift */,
+				08E9835228DC346A001C1E2C /* Coordinator */,
 				08CC6D7628C7675B00D05968 /* Services */,
 				08E1643928D83CD00034818C /* SearchModule */,
 				08CC6D7E28C767C500D05968 /* MainModule */,
@@ -357,6 +360,14 @@
 				08E1643B28D83D0C0034818C /* SearchViewController.xib */,
 			);
 			path = SearchModule;
+			sourceTree = "<group>";
+		};
+		08E9835228DC346A001C1E2C /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				08E1643628D835560034818C /* Coordinator.swift */,
+			);
+			path = Coordinator;
 			sourceTree = "<group>";
 		};
 		0CEF4D92FC7D85C3256CE7B6 /* Pods */ = {
@@ -523,6 +534,7 @@
 				085A6DEC28CF429A00C97196 /* Cast.swift in Sources */,
 				08CC6D8128C767E000D05968 /* Movie.swift in Sources */,
 				08323B8528CB4B0600984508 /* DetailViewController.swift in Sources */,
+				08E9835428DC3D0E001C1E2C /* String.swift in Sources */,
 				08CC6D7928C7677700D05968 /* NetworkService.swift in Sources */,
 				088CD00F28D0528F000DDABA /* CastCollectionViewCell.swift in Sources */,
 				08D95DF728D5B63A006A7280 /* PlayingTableViewCell.swift in Sources */,

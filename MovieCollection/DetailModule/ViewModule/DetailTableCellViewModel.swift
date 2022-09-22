@@ -17,7 +17,7 @@ class DetailTableCellViewModel: CellViewModelType {
     var genres: String = ""
     var originalLanguage: String
     var overview: String
-    var releaseDate: String
+    var releaseDate: String = ""
     
     init(movie: Result, genre: GenreData) {
         self.movie = movie
@@ -26,7 +26,7 @@ class DetailTableCellViewModel: CellViewModelType {
         self.originalLanguage = movie.originalLanguage
         self.id = movie.id
         self.overview = movie.overview
-        self.releaseDate = movie.releaseDate
+        self.releaseDate = truncateToYear(movie.releaseDate)
         self.image = makeImageURL(movie.posterPath)
         self.genres = getGenre(genreIds: movie.genreIDS, genreData: genre)
     }
@@ -49,6 +49,10 @@ class DetailTableCellViewModel: CellViewModelType {
             }
         }
         return String(genreString.dropLast(2))
+    }
+    
+    func truncateToYear(_ date: String) -> String {
+        return date.truncate(length: 4)
     }
     
 }
