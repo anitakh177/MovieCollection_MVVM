@@ -24,6 +24,7 @@ class MainViewModel: TableViewModelType {
     // MARK: - Delegate
     
     weak var appCoordinator: AppCoordinator!
+    weak var coordinator: MainViewCoordinator!
     
     // MARK: - Methods
     
@@ -68,9 +69,6 @@ class MainViewModel: TableViewModelType {
         return movie
     }
     
-    func goToSearchViewController() {
-        appCoordinator.goToSearchViewController()
-    }
 }
 
 // MARK: - Private Methods

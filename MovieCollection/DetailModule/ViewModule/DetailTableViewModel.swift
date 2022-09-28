@@ -18,7 +18,7 @@ class DetailTableViewModel: TableViewModelType {
     
     // MARK: - Delegate
     
-    weak var appCoordinator: AppCoordinator!
+    weak var coordinator: DetailViewCoordinator!
     weak var delegateCast: FetchCast?
     
     // MARK: - Methods
@@ -52,7 +52,6 @@ class DetailTableViewModel: TableViewModelType {
         dispatchGroup.enter()
         dataFetchService.fetchCastImage(castID: id) { [weak self] (result) in
             self?.castImageData = result
-           // print(self?.castImageData)
             dispatchGroup.leave()
         }
      
@@ -62,10 +61,6 @@ class DetailTableViewModel: TableViewModelType {
     }
     
 }
-
-    func goToSearchViewController() {
-        appCoordinator.goToSearchViewController()
-    }
     
 }
 

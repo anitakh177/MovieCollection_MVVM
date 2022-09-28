@@ -17,7 +17,7 @@ class SearchViewController: UIViewController {
     
     // MARK: - Properties
     
-    private var viewModel = SearchViewModel()
+    var viewModel = SearchViewModel()
     private var popularMovieDataSource: [PopularMovieCellViewModel] = [] {
         didSet {
             if popularMovieDataSource.isEmpty {
@@ -136,4 +136,8 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let movieID = popularMovieDataSource[indexPath.row].movieID
+        viewModel.coordinator.pushToDetail(with: movieID, with: viewModel)
+    }
 }

@@ -84,7 +84,7 @@ private extension DetailViewController {
     
     }
     @objc func didTapSearch() {
-         viewModel.goToSearchViewController()
+        viewModel.coordinator.pushSearchVC()
     }
 }
 
@@ -157,7 +157,8 @@ extension DetailViewController: FetchCast {
     }
     
     func getMovieID() -> Int {
-        return cellViewModel!.id
+        
+        return cellViewModel?.id ?? 0
     }
    
 }

@@ -69,7 +69,7 @@ private extension MainViewController {
         
     }
     @objc func didTapSearch() {
-        viewModel.goToSearchViewController()
+        viewModel.coordinator.pushSearchVC()
     }
     
     func configureTableView() {
@@ -88,23 +88,6 @@ private extension MainViewController {
         }
        
     }
-    
-    func openDetail(movieID: Int) {
-        guard let movie = viewModel.retrivePopulerMovieDetails(with: movieID) else {
-            return
-        }
-        guard let genre = viewModel.genreData else {
-            return
-        }
-       
-        let detailCellViewModel = DetailTableCellViewModel(movie: movie, genre: genre)
-        let detailViewController = DetailViewController()
-        detailViewController.cellViewModel = detailCellViewModel
-        DispatchQueue.main.async {
-            self.navigationController?.pushViewController(detailViewController, animated: true)
-        }
-    }
-    
 }
 
 extension MainViewController: UITableViewDataSource, UITableViewDelegate {
@@ -127,13 +110,14 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
             
             cell?.didSelectMovie = { [weak self] index in
                 guard let self = self else { return }
-                self.openDetail(movieID: self.nowPlayingDataSource[index].movieID)
+                self.viewModel.coordinator.pushDetailVC(with: self.nowPlayingDataSource[index].movieID, with: self.viewModel)
             }
             return cell ?? UITableViewCell()
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "\(PopularMovieTableViewCell.self)", for: indexPath) as? PopularMovieTableViewCell
-            let viewModel = popularMovieDataSource[indexPath.row]
-            cell?.configureCellData(viewModel: viewModel)
+           let viewModel = popularMovieDataSource[indexPath.row]
+  
+           cell?.configureCellData(viewModel: viewModel)
             
             return cell ?? UITableViewCell()
         }
@@ -161,7 +145,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let movieID = popularMovieDataSource[indexPath.row].movieID
-        self.openDetail(movieID: movieID)
+        viewModel.coordinator.pushDetailVC(with: movieID, with: viewModel)
     }
     
 }
