@@ -69,7 +69,7 @@ private extension SearchViewController {
         let rightNavBar = UIBarButtonItem(customView: searchBar)
         navigationItem.rightBarButtonItem = rightNavBar
         
-        let leftNavBar = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(closeSearchVC))
+        let leftNavBar = UIBarButtonItem(image: ImageConstants.backImage, style: .plain, target: self, action: #selector(closeSearchVC))
         leftNavBar.tintColor = .white
         
         navigationItem.leftBarButtonItem = leftNavBar

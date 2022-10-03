@@ -25,6 +25,6 @@ class ImageTableViewCell: UITableViewCell {
     }
     func configureCellData(viewModel: DetailTableCellViewModel) {
         movieImage.sd_setImage(with: viewModel.image)
-        }
+    }
     
 }

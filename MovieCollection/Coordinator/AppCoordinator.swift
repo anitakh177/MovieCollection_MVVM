@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 protocol Coordinator: AnyObject {
-    
+
     var childCoordinator: [Coordinator] { get set }
     
     func start()
@@ -33,7 +33,12 @@ class AppCoordinator: Coordinator {
         let tabBarController = self.setTabBarController()
         self.window?.rootViewController = tabBarController
     }
+}
     
+    // MARK: - Private Methods
+   
+private extension AppCoordinator {
+   
     func setTabBarController() -> UITabBarController {
         let tabBarController = UITabBarController()
         var item: [UITabBarItem] = []

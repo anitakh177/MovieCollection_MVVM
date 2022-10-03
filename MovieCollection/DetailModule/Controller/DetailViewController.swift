@@ -23,6 +23,8 @@ class DetailViewController: UIViewController {
     var cellViewModel: DetailTableCellViewModel?
     var castCellDataSource: [CastCollectionViewModel] = []
     
+    var favoriteStoreService = FavoriteMovieStorage()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.delegateCast = self
@@ -40,7 +42,7 @@ class DetailViewController: UIViewController {
 }
 
 private extension DetailViewController {
-    
+
     func bindViewModel() {
         viewModel.castCellView.bind { [weak self] (result) in
             guard let self = self, let result = result else { return }
@@ -71,21 +73,22 @@ private extension DetailViewController {
         navigationItem.title = "Movie Collection"
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         
-        let searchButton = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .plain, target: self, action: #selector(didTapSearch))
+        let searchButton = UIBarButtonItem(image: ImageConstants.searchImage, style: .plain, target: self, action: #selector(didTapSearch))
         searchButton.tintColor = .white
         navigationItem.rightBarButtonItem = searchButton
-        let leftNavBar = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(closeSearchVC))
+        let leftNavBar = UIBarButtonItem(image: ImageConstants.backImage, style: .plain, target: self, action: #selector(closeSearchVC))
         leftNavBar.tintColor = .white
         
         navigationItem.leftBarButtonItem = leftNavBar
     }
     @objc func closeSearchVC() {
-        navigationController?.popViewController(animated: true)
+        viewModel.coordinator.backToRootView()
     
     }
     @objc func didTapSearch() {
         viewModel.coordinator.pushSearchVC()
     }
+  
 }
 
 extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
@@ -107,7 +110,14 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
         
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "\(TitleTableViewCell.self)", for: indexPath) as? TitleTableViewCell
-            cell?.configureCellData(with: cellViewModel!)
+            cell?.configureCellData(with: cellViewModel!) {  [weak self] isFavorite in
+                guard let self = self else {
+                    return
+                }
+                self.cellViewModel!.isFavorite = isFavorite
+                self.viewModel.changeFavoriteStatus(cellViewModel: self.cellViewModel!, for: self.cellViewModel!.id, isFavorite: isFavorite)
+                
+            }
             
                 return cell ?? UITableViewCell()
             

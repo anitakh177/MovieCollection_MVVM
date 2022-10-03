@@ -48,4 +48,8 @@ extension DetailViewCoordinator {
         searchViewCoordinator.start()
         
     }
+    
+    func backToRootView() {
+        navigationController.popToRootViewController(animated: true)
+    }
 }

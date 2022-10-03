@@ -63,7 +63,7 @@ private extension MainViewController {
         navigationItem.title = "Movie Collection"
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         
-        let searchButton = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .plain, target: self, action: #selector(didTapSearch))
+        let searchButton = UIBarButtonItem(image: ImageConstants.searchImage, style: .plain, target: self, action: #selector(didTapSearch))
         searchButton.tintColor = .white
         navigationItem.rightBarButtonItem = searchButton
         
@@ -115,9 +115,9 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
             return cell ?? UITableViewCell()
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "\(PopularMovieTableViewCell.self)", for: indexPath) as? PopularMovieTableViewCell
-           let viewModel = popularMovieDataSource[indexPath.row]
-  
-           cell?.configureCellData(viewModel: viewModel)
+            let viewModel = popularMovieDataSource[indexPath.row]
+            
+            cell?.configureCellData(viewModel: viewModel)
             
             return cell ?? UITableViewCell()
         }

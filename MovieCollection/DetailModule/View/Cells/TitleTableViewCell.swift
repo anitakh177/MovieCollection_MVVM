@@ -9,6 +9,27 @@ import UIKit
 
 class TitleTableViewCell: UITableViewCell {
     
+    // MARK: - Constants
+    
+    private enum Constants {
+        static let fillBookMarkImage = UIImage(systemName: "bookmark.fill")
+        static let bookMarkImage = UIImage(systemName: "bookmark")
+    }
+    
+    var buttonImage: UIImage? {
+        return isFavorite ? Constants.fillBookMarkImage : Constants.bookMarkImage
+        
+    }
+    
+    var isFavorite: Bool = false {
+        didSet {
+            saveButton.setImage(buttonImage, for: .normal)
+        }
+    }
+    // MARK: - Events
+    
+    var completionHandler: ((Bool) -> Void)?
+    
     // MARK: - Views
 
     @IBOutlet private weak var titleLabel: UILabel!
@@ -22,12 +43,18 @@ class TitleTableViewCell: UITableViewCell {
     }
     
     @IBAction func saveToFavorite(_ sender: UIButton) {
+        completionHandler?(isFavorite)
+        isFavorite.toggle()
     }
     
-    func configureCellData(with viewModel: DetailTableCellViewModel) {
+    func configureCellData(with viewModel: DetailTableCellViewModel, completionHandler: ((Bool) -> Void)?) {
         titleLabel.text = viewModel.title
         ratingLabel.text = viewModel.rating
         genreLabel.text = viewModel.genres
+        isFavorite = viewModel.isFavorite
+        
+        self.completionHandler = completionHandler
+        
     }
     
 }

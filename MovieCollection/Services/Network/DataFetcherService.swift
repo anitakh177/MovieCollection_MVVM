@@ -46,4 +46,9 @@ class DataFetcherService {
         dataFetcher.fetchGenericJSONData(urlString: urlSearch, response: completion)
     }
     
+    func getMovieDetails(id: Int, completion: @escaping(FavoriteMovie?) -> Void) {
+        let url = "https://api.themoviedb.org/3/movie/\(id)?api_key=\(apiKey)"
+        dataFetcher.fetchGenericJSONData(urlString: url, response: completion)
+    }
+    
 }

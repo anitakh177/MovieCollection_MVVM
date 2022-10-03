@@ -7,7 +7,7 @@
 
 import Foundation
 
-class CastCollectionViewModel: CellViewModelType {
+final class CastCollectionViewModel: CellViewModelType {
     
     var name: String
     var personID: Int
