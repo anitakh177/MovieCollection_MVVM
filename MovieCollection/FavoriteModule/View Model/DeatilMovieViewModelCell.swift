@@ -8,6 +8,7 @@
 import Foundation
 
 class DeatilMovieViewModelCell {
+    
     var movieID: Int
     var title: String
     var image: URL?

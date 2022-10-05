@@ -34,3 +34,16 @@ class FavoriteViewCoordinator: Coordinator {
         return navigationController
     }
 }
+
+extension FavoriteViewCoordinator {
+    
+    func pushSearchVC() {
+        
+        let searchViewCoordinator = SearchViewCoordinator(naviagtionController: navigationController)
+        searchViewCoordinator.parentCoordinator = self
+        childCoordinator.append(searchViewCoordinator)
+        searchViewCoordinator.start()
+        
+    }
+    
+}

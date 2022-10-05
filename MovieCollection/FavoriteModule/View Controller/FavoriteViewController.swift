@@ -11,20 +11,21 @@ class FavoriteViewController: UIViewController {
     
     // MARK: - Views
     
-    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet weak var tableView: UITableView!
     
     var viewModel = FavoriteViewModel()
     private var favoriteMovieDataSource: [DeatilMovieViewModelCell] = []
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        configureNavigationBar()
         viewModel.getData()
         bindViewModel()
-        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.delegate = self
         configureApperance()
     }
    
@@ -33,11 +34,11 @@ class FavoriteViewController: UIViewController {
 // MARK: - Private Methods
 
 private extension FavoriteViewController {
+    
     func bindViewModel() {
         viewModel.favoriteMovieDataSource.bind { [weak self] (result) in
             guard let self = self, let result = result else { return }
             self.favoriteMovieDataSource = result
-            print(result)
             self.tableView.reloadData()
         }
     }
@@ -57,7 +58,21 @@ private extension FavoriteViewController {
         
     }
     
+    func configureNavigationBar() {
+        navigationItem.title = "Favorite Movies"
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        
+        let searchButton = UIBarButtonItem(image: ImageConstants.searchImage, style: .plain, target: self, action: #selector(didTapSearch))
+        searchButton.tintColor = .white
+        navigationItem.rightBarButtonItem = searchButton
+    }
+    @objc func didTapSearch() {
+        viewModel.coordinator.pushSearchVC()
+    }
+    
 }
+    
+// MARK: - Table Data Source & Delegate
 
 extension FavoriteViewController: UITableViewDataSource, UITableViewDelegate {
     
@@ -70,6 +85,27 @@ extension FavoriteViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "\(PopularMovieTableViewCell.self)", for: indexPath) as? PopularMovieTableViewCell
         cell?.configureCell(viewModel: favoriteMovieDataSource[indexPath.row])
         return cell ?? UITableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            viewModel.remove(cellViewModel: favoriteMovieDataSource[indexPath.row])
+            tableView.deleteRows(at: [indexPath], with: .fade)
+                        
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        let movieID = favoriteMovieDataSource[indexPath.row].movieID
+       // viewModel.coordinator.pushDetailVC(with: movieID, with: viewModel)
+    }
+    
+}
+
+extension FavoriteViewController: DetailVCWillClose {
+    func detailVCWillClose() {
+        print("closing")
+        tableView.reloadData()
     }
     
 }

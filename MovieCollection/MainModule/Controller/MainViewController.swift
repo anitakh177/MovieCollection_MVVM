@@ -115,9 +115,9 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
             return cell ?? UITableViewCell()
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "\(PopularMovieTableViewCell.self)", for: indexPath) as? PopularMovieTableViewCell
-            let viewModel = popularMovieDataSource[indexPath.row]
+           let viewModel = popularMovieDataSource[indexPath.row]
             
-            cell?.configureCellData(viewModel: viewModel)
+           cell?.configureCellData(viewModel: viewModel)
             
             return cell ?? UITableViewCell()
         }

@@ -21,8 +21,14 @@ final class DetailTableViewModel: TableViewModelType {
     
     weak var coordinator: DetailViewCoordinator!
     weak var delegateCast: FetchCast?
+    var detailWillCloseDelegate: DetailVCWillClose?
     
     // MARK: - Methods
+    
+    func notificationToFavViewController() {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newDataNotif"), object: nil)
+        
+    }
     
    func changeFavoriteStatus(cellViewModel: DetailTableCellViewModel, for id: Int, isFavorite: Bool ) {
         cellViewModel.isFavorite = isFavorite

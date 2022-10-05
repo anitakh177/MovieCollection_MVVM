@@ -14,13 +14,16 @@ class FavoriteMovieStorage {
    
     private let userDefaults = UserDefaults.standard
     
+    init() {
+        getDataFromUserDefaults()
+    }
+    
     func changeStatus(id: Int, isFavorite: Bool) {
            if isFavorite {
                removeFavoriteItem(id)
                print("removed id \(id)")
            } else {
                saveFavoriteItem(id)
-              
                print("saved id \(id)")
            }
        }
@@ -29,7 +32,6 @@ class FavoriteMovieStorage {
         guard let items = getFavoriteItems() else {
             return false
         }
-       print(items.contains(id) ? true : false)
         return items.contains(id) ? true : false
     }
     
@@ -44,7 +46,7 @@ class FavoriteMovieStorage {
     func removeFavoriteItems() {
         userDefaults.removeObject(forKey: itemKey)
     }
-    
+   
 }
 
 // MARK: - Private methods
@@ -52,8 +54,7 @@ class FavoriteMovieStorage {
 private extension FavoriteMovieStorage {
     
     func saveFavoriteItem(_ id: Int) {
-        savedMovies.append(id)
-        print(savedMovies.count)
+        savedMovies.insert(id, at: 0)
         saveToUserDefaults()
     }
     
@@ -67,7 +68,7 @@ private extension FavoriteMovieStorage {
         userDefaults.set(dataForUserDefaults, forKey: itemKey)
     }
     
-      func getDataFromUserDefaults() {
+    func getDataFromUserDefaults() {
         guard let dataFromUserDefaults = userDefaults.value(forKey: itemKey) as? Data,
               let items = try? JSONDecoder().decode([Int].self, from: dataFromUserDefaults) else {
             return

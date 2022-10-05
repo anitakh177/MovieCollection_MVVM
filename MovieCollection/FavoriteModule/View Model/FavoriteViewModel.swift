@@ -19,7 +19,14 @@ class FavoriteViewModel {
     let favoriteService = FavoriteMovieStorage()
     let dataFetchService = DataFetcherService()
    
+   weak var delegate: DetailVCWillClose?
+    
     // MARK: - Methods
+    
+    func remove(cellViewModel: DeatilMovieViewModelCell) {
+        movieArray = movieArray.filter { !($0.id == cellViewModel.movieID) }
+        favoriteService.changeStatus(id: cellViewModel.movieID, isFavorite: true)
+        }
     
     func retrieveFavoriteMovies() -> [Int] {
         guard let id = favoriteService.getFavoriteItems()  else { return  [] }

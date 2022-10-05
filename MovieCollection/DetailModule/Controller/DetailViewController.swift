@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol DetailVCWillClose: AnyObject {
+    func detailVCWillClose()
+}
+
 protocol FetchCast: AnyObject {
     func getMovieID() -> Int
     func getPersonID() -> [Int]
@@ -23,15 +27,18 @@ class DetailViewController: UIViewController {
     var cellViewModel: DetailTableCellViewModel?
     var castCellDataSource: [CastCollectionViewModel] = []
     
-    var favoriteStoreService = FavoriteMovieStorage()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.delegateCast = self
         viewModel.getData()
         bindViewModel()
         configureAppearance()
-      
+        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+       // viewModel.detailWillCloseDelegate?.detailVCWillClose()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -81,6 +88,7 @@ private extension DetailViewController {
         
         navigationItem.leftBarButtonItem = leftNavBar
     }
+    
     @objc func closeSearchVC() {
         viewModel.coordinator.backToRootView()
     
@@ -102,6 +110,7 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         switch indexPath.row {
+            
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "\(ImageTableViewCell.self)", for: indexPath) as? ImageTableViewCell
             cell?.configureCellData(viewModel: cellViewModel!)
@@ -110,6 +119,7 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
         
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "\(TitleTableViewCell.self)", for: indexPath) as? TitleTableViewCell
+           
             cell?.configureCellData(with: cellViewModel!) {  [weak self] isFavorite in
                 guard let self = self else {
                     return
@@ -122,26 +132,29 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
                 return cell ?? UITableViewCell()
             
         case 2:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "\(ParametersTableViewCell.self)", for: indexPath) as? ParametersTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "\(ParametersTableViewCell.self)", for: indexPath) as? ParametersTableViewCell
             cell?.configureCellData(viewModel: cellViewModel!)
             
-                return cell ?? UITableViewCell()
+            return cell ?? UITableViewCell()
+            
         case 3:
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "\(OverviewTableViewCell.self)", for: indexPath) as? OverviewTableViewCell
             cell?.configureCellData(viewModel: cellViewModel!)
             
-                return cell ?? UITableViewCell()
-           
+            return cell ?? UITableViewCell()
+            
         case 4:
+            
             let cell = tableView.dequeueReusableCell(withIdentifier: "\(CastTableViewCell.self)", for: indexPath) as? CastTableViewCell
             cell?.updateCell(with: castCellDataSource)
+            
             return cell ?? UITableViewCell()
             
         default:
-                return UITableViewCell()
-        
-            }
+            return UITableViewCell()
+            
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
