@@ -11,9 +11,9 @@ class MainViewModel: TableViewModelType {
     
     // MARK: - Properties
 
-    let dataFetchService = DataFetcherService()
-    private var movieModel: Movie?
-    var genreData: GenreData?
+    private let dataFetchService = DataFetcherService()
+    private var movieModel: MovieResult?
+    private var movieArray: [Movie] = []
     var playingMovieDataSource: Observable<[NowPlayingMovieCellViewModel]> = Observable(nil)
     var popularMovieDataSource: Observable<[PopularMovieCellViewModel]> = Observable(nil)
     
@@ -36,34 +36,49 @@ class MainViewModel: TableViewModelType {
         return movieModel?.results.count ?? 0
     }
     
-    func getData() {
-        
-        let dispatchGroup = DispatchGroup()
-        dispatchGroup.enter()
-        dataFetchService.fetchGenres { [weak self] (result) in
-            self?.genreData = result
-            dispatchGroup.leave()
-        }
-        
-        dispatchGroup.enter()
+    func retrieveFavoriteMovies() -> [Int] {
         dataFetchService.fetchNowMovie { [weak self] (result) in
             self?.movieModel = result
-            self?.mapNowPlayingMovieData()
         }
-        
-        dataFetchService.fetchPopularMovie { [weak self] (result) in
-            self?.movieModel = result
-            self?.mapPopularMovieData()
-            dispatchGroup.leave()
-        }
-        
-        dispatchGroup.notify(queue: DispatchQueue.main) {
-        }
+        return movieModel!.results.map({$0.id})
+    }
+    
+    func getData() {
+            
+            dataFetchService.fetchNowMovie { [weak self] (result) in
+                self?.movieModel = result
+                if let movieID = self?.movieModel?.results.map({$0.id}) {
+                    
+                    movieID.forEach { [weak self] (id) in
+                        self?.dataFetchService.getMovieDetails(id: id) { [weak self] (result) in
+                            
+                            self?.movieArray.append(result!)
+                            self?.mapNowPlayingMovieData()
+                        }
+                    }
+                }
+                
+            }
+            
+            dataFetchService.fetchPopularMovie { [weak self] (result) in
+                self?.movieModel = result
+                if let movieID = self?.movieModel?.results.map({$0.id}) {
+                    
+                    movieID.forEach { [weak self] (id) in
+                        self?.dataFetchService.getMovieDetails(id: id) { [weak self] (result) in
+                            
+                            self?.movieArray.append(result!)
+                            self?.mapPopularMovieData()
+                        }
+                        
+                    }
+                }
+            }
         
     }
     
-    func retrivePopulerMovieDetails(with id: Int) -> Result? {
-        guard let movie = movieModel?.results.first(where: {$0.id == id}) else {
+    func retrieveMovieDetails(with id: Int) -> Movie? {
+        guard let movie = movieArray.first(where: {$0.id == id}) else {
             return nil
         }
         return movie
@@ -76,14 +91,12 @@ class MainViewModel: TableViewModelType {
 private extension MainViewModel {
     
     func mapNowPlayingMovieData() {
-       playingMovieDataSource.value = self.movieModel?.results.compactMap({NowPlayingMovieCellViewModel(movie: $0)
+        playingMovieDataSource.value = self.movieArray.compactMap({NowPlayingMovieCellViewModel(movie: $0)
        })
    }
    
     func mapPopularMovieData() {
-       guard let genreData = genreData else { return  }
-       
-       popularMovieDataSource.value = self.movieModel?.results.compactMap({ PopularMovieCellViewModel(movie: $0, genre: genreData)
+       popularMovieDataSource.value = self.movieArray.compactMap({ PopularMovieCellViewModel(movie: $0)
        })
        
    }

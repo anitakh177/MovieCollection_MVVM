@@ -12,39 +12,32 @@ class PopularMovieCellViewModel: CellViewModelType {
     var movieID: Int
     var title: String
     var image: URL?
-    var rating: Double
+    var rating: String
     var releaseDate: String = ""
     var genres: String = ""
     
-    init(movie: Result, genre: GenreData) {
+    init(movie: Movie) {
         self.movieID = movie.id
         self.title = movie.title
-        self.rating = movie.voteAverage
-        self.releaseDate = truncateToYear(movie.releaseDate)
-        self.genres = getGenre(genreIds: movie.genreIDS, genreData: genre)
+        self.rating = String(format: "%.1f", movie.voteAverage)
+        self.releaseDate = String(movie.releaseDate.dropLast(6))
+        self.genres = getGenreString(genreData: movie)
         self.image = makeImageURL(movie.posterPath)
         
+    }
+    
+    func getGenreString(genreData: Movie?) -> String {
+        var genreString = ""
+        
+        for genre in genreData!.genres {
+            genreString += genre.name + ", "
+            continue
+        }
+        return String(genreString.dropLast(2))
     }
     
     func makeImageURL(_ imageCode: String) -> URL? {
        URL(string: "https://image.tmdb.org/t/p/w500/\(imageCode)")
     }
-    
-    func getGenre(genreIds: [Int], genreData: GenreData?) -> String {
-                var genreString = ""
-                for genreId in genreIds {
-                    if let geners = (genreData?.genres) {
-                        for genre in geners {
-                            if genreId == genre.id {
-                                genreString += genre.name + ", "
-                                continue
-                            }
-                        }
-                    }
-                }
-                return String(genreString.dropLast(2))
-            }
-    func truncateToYear(_ date: String) -> String {
-        return date.truncate(length: 4)
-    }
+   
 }

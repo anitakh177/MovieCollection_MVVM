@@ -7,9 +7,9 @@
 
 import Foundation
  
-final class DetailTableCellViewModel: CellViewModelType {
+final class DetailTableCellViewModel {
     
-    var movie: Result
+    var movie: Movie
     var id: Int
     var image: URL?
     var title: String
@@ -19,43 +19,62 @@ final class DetailTableCellViewModel: CellViewModelType {
     var overview: String
     var releaseDate: String = ""
     var isFavorite: Bool
+    var duration: String = ""
     
-    init(movie: Result, genre: GenreData) {
+    init(movie: Movie) {
         self.movie = movie
         self.title = movie.title
-        self.rating = "\(movie.voteAverage)/10 IMDb"
+        self.rating = String(format: "%.1f", movie.voteAverage)
         self.originalLanguage = movie.originalLanguage
         self.id = movie.id
         self.overview = movie.overview
+        self.releaseDate = String(movie.releaseDate.dropLast(6))
         self.isFavorite = storage.isFavoriteItem(id: id)
-        self.releaseDate = truncateToYear(movie.releaseDate)
         self.image = makeImageURL(movie.posterPath)
-        self.genres = getGenre(genreIds: movie.genreIDS, genreData: genre)
+        self.genres = getGenreString(genreData: movie)
+        self.duration = "\(movie.runtime)"
     }
     
+// MARK: - Properties
+    
     let storage = FavoriteMovieStorage()
+}
+
+// MARK: - Privite Methods
+
+private extension DetailTableCellViewModel {
+    func getGenreString(genreData: Movie?) -> String {
+        var genreString = ""
+        
+        for genre in genreData!.genres {
+            genreString += genre.name + ", "
+            continue
+        }
+        return String(genreString.dropLast(2))
+    }
     
     func makeImageURL(_ imageCode: String) -> URL? {
         URL(string: "https://image.tmdb.org/t/p/w500/\(imageCode)")
         
     }
     
-    private func getGenre(genreIds: [Int], genreData: GenreData?) -> String {
-        var genreString = ""
-        for genreId in genreIds {
-            if let geners = (genreData?.genres) {
-                for genre in geners {
-                    if genreId == genre.id {
-                        genreString += genre.name + ", "
-                        continue
-                    }
-                }
-            }
-        }
-        return String(genreString.dropLast(2))
+    func convertToHours(minutes: Int) -> String {
+        let formatter = DateComponentsFormatter()
+        formatter.unitsStyle = .brief
+        formatter.allowedUnits = [.hour, .minute]
+        
+        let formattedString = formatter.string(from: TimeInterval(minutes))!
+        print(formattedString)
+        return formattedString
+        
+    }
+    func stringFromTimeInterval(time: Int) -> String {
+        
+        let minutes = (time / 60) % 60
+        let hours = (time / 3600)
+        
+        return String(format: "%0.2d:%0.2d", hours, minutes)
+        
     }
     
-   private func truncateToYear(_ date: String) -> String {
-        return date.truncate(length: 4)
-    }
 }

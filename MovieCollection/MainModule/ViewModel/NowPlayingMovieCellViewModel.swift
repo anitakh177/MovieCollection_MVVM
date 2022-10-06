@@ -13,7 +13,7 @@ class NowPlayingMovieCellViewModel: CellViewModelType {
     var title: String
     var movieID: Int
     
-    init(movie: Result) {
+    init(movie: Movie) {
         
         self.title = movie.title
         self.movieID = movie.id

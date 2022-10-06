@@ -15,13 +15,11 @@ class DetailViewCoordinator: Coordinator {
     var childCoordinator: [Coordinator] = []
     
     var navigationController: UINavigationController!
-    var movie: Result
-    var genre: GenreData
+    var movie: Movie
     
-    init(naviagtionController: UINavigationController, movie: Result, genre: GenreData) {
+    init(naviagtionController: UINavigationController, movie: Movie) {
         self.navigationController = naviagtionController
         self.movie = movie
-        self.genre = genre
     }
     
     func start() {
@@ -30,7 +28,7 @@ class DetailViewCoordinator: Coordinator {
         let detailViewController = DetailViewController()
         detailTableViewModel.coordinator = self
        
-        let detailCellViewModel = DetailTableCellViewModel(movie: movie, genre: genre)
+        let detailCellViewModel = DetailTableCellViewModel(movie: movie)
         detailViewController.viewModel = detailTableViewModel
         detailViewController.cellViewModel = detailCellViewModel
         navigationController.pushViewController(detailViewController, animated: true)

@@ -32,22 +32,16 @@ class SearchViewCoordinator: Coordinator {
     
     func pushToDetail(with movieID: Int, with searchVM: SearchViewModel) {
         
-        guard let movie = searchVM.retrivePopulerMovieDetails(with: movieID) else {
+        guard let movie = searchVM.retriveMovieDetails(with: movieID) else {
             return
         }
         
-        guard let genre = searchVM.genreData else {
-            return
-        }
+        let detailViewCoordinator = DetailViewCoordinator(naviagtionController: navigationController, movie: movie)
+        detailViewCoordinator.parentCoordinator = self
+        childCoordinator.append(detailViewCoordinator)
         
-        let detailViewCoordinator = DetailViewCoordinator(naviagtionController: navigationController, movie: movie, genre: genre)
-         detailViewCoordinator.parentCoordinator = self
-         childCoordinator.append(detailViewCoordinator)
-         
-         print(movie.title)
-        
-         detailViewCoordinator.start()
-        
+        detailViewCoordinator.start()
+    
     }
     
 }

@@ -37,13 +37,4 @@ class PopularMovieTableViewCell: UITableViewCell {
         
     }
     
-    func configureCell(viewModel: DeatilMovieViewModelCell) {
-        titleLabel.text = viewModel.title
-        releaseLabel.text = viewModel.releaseDate
-        ratingLabel.text = "\(viewModel.rating)/10 IMDb"
-        genreLabel.text = viewModel.genres
-        
-        movieImageView.sd_setImage(with: viewModel.image)
-    }
-    
 }

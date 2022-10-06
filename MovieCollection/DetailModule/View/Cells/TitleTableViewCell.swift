@@ -49,7 +49,7 @@ class TitleTableViewCell: UITableViewCell {
     
     func configureCellData(with viewModel: DetailTableCellViewModel, completionHandler: ((Bool) -> Void)?) {
         titleLabel.text = viewModel.title
-        ratingLabel.text = viewModel.rating
+        ratingLabel.text = viewModel.rating + " IMDb"
         genreLabel.text = viewModel.genres
         isFavorite = viewModel.isFavorite
         

@@ -1,42 +1,34 @@
 //
-//  File.swift
+//  FavoriteMovie.swift
 //  MovieCollection
 //
-//  Created by anita on 06.09.2022.
+//  Created by anita on 03.10.2022.
 //
 
 import Foundation
 
-// MARK: - PopularMovie
+// MARK: - FavoriteMovie
 struct Movie: Codable {
-    let results: [Result]
-}
-
-// MARK: - Result
-struct Result: Codable {
-    let adult: Bool
     let backdropPath: String
-    let genreIDS: [Int]
+    let genres: [Genre]
     let id: Int
-    let originalLanguage, originalTitle, overview: String
-    let popularity: Double
-    let posterPath, releaseDate, title: String
-    let video: Bool
+    let overview: String
+    let posterPath: String
+    let originalLanguage: String
+    let releaseDate: String
+    let runtime: Int
+    let title: String
     let voteAverage: Double
-    let voteCount: Int
 
     enum CodingKeys: String, CodingKey {
-        case adult
         case backdropPath = "backdrop_path"
-        case genreIDS = "genre_ids"
-        case id
+        case genres, id
         case originalLanguage = "original_language"
-        case originalTitle = "original_title"
-        case overview, popularity
+        case overview
         case posterPath = "poster_path"
         case releaseDate = "release_date"
-        case title, video
+        case runtime
+        case title
         case voteAverage = "vote_average"
-        case voteCount = "vote_count"
     }
 }

@@ -26,6 +26,8 @@ class SearchViewController: UIViewController {
         }
     }
     
+    // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureAppearance()
@@ -46,12 +48,10 @@ class SearchViewController: UIViewController {
 private extension SearchViewController {
     
     func bindViewModel() {
-        
         viewModel.popularMovieDataSource.bind { [weak self] (result) in
             guard let self = self, let result = result else { return }
             self.popularMovieDataSource = result
              self.tableView.reloadData()
-            
         }
     }
     
@@ -94,6 +94,8 @@ private extension SearchViewController {
     
 }
 
+// MARK: - Search Bar Delegate
+
 extension SearchViewController: UISearchBarDelegate {
     
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
@@ -116,6 +118,8 @@ extension SearchViewController: UISearchBarDelegate {
     }
    
 }
+
+// MARK: - Table View Data Source & Delegate
 
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     

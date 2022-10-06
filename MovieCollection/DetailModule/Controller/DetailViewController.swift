@@ -100,6 +100,7 @@ private extension DetailViewController {
 }
 
 extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         viewModel.numberOfSections()
     }
@@ -173,6 +174,7 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
 }
 
 extension DetailViewController: FetchCast {
+    
     func getPersonID() -> [Int] {
         let id = castCellDataSource.compactMap({$0.personID})
         print(id)

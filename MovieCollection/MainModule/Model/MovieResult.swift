@@ -1,25 +1,26 @@
 //
-//  FavoriteMovie.swift
+//  File.swift
 //  MovieCollection
 //
-//  Created by anita on 03.10.2022.
+//  Created by anita on 06.09.2022.
 //
 
 import Foundation
 
-// MARK: - FavoriteMovie
-struct FavoriteMovie: Codable {
+// MARK: - PopularMovie
+struct MovieResult: Codable {
+    let results: [Result]
+}
+
+// MARK: - Result
+struct Result: Codable {
     let adult: Bool
     let backdropPath: String
-    let genres: [Genre]
-    let homepage: String
+    let genreIDS: [Int]
     let id: Int
-    let imdbID, originalLanguage, originalTitle, overview: String
+    let originalLanguage, originalTitle, overview: String
     let popularity: Double
-    let posterPath: String
-    let releaseDate: String
-    let revenue, runtime: Int
-    let status, tagline, title: String
+    let posterPath, releaseDate, title: String
     let video: Bool
     let voteAverage: Double
     let voteCount: Int
@@ -27,15 +28,14 @@ struct FavoriteMovie: Codable {
     enum CodingKeys: String, CodingKey {
         case adult
         case backdropPath = "backdrop_path"
-        case genres, homepage, id
-        case imdbID = "imdb_id"
+        case genreIDS = "genre_ids"
+        case id
         case originalLanguage = "original_language"
         case originalTitle = "original_title"
         case overview, popularity
         case posterPath = "poster_path"
         case releaseDate = "release_date"
-        case revenue, runtime
-        case status, tagline, title, video
+        case title, video
         case voteAverage = "vote_average"
         case voteCount = "vote_count"
     }

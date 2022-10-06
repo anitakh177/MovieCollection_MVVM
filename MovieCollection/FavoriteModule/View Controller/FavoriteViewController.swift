@@ -13,9 +13,13 @@ class FavoriteViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
+    // MARK: - Properties
+    
     var viewModel = FavoriteViewModel()
-    private var favoriteMovieDataSource: [DeatilMovieViewModelCell] = []
+    private var favoriteMovieDataSource: [PopularMovieCellViewModel] = []
 
+    // MARK: - Lifecycle
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         configureNavigationBar()
@@ -28,7 +32,6 @@ class FavoriteViewController: UIViewController {
         viewModel.delegate = self
         configureApperance()
     }
-   
 }
 
 // MARK: - Private Methods
@@ -83,21 +86,20 @@ extension FavoriteViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "\(PopularMovieTableViewCell.self)", for: indexPath) as? PopularMovieTableViewCell
-        cell?.configureCell(viewModel: favoriteMovieDataSource[indexPath.row])
+        cell?.configureCellData(viewModel: favoriteMovieDataSource[indexPath.row])
         return cell ?? UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            viewModel.remove(cellViewModel: favoriteMovieDataSource[indexPath.row])
+            viewModel.removeFavoriteMovie(cellViewModel: favoriteMovieDataSource[indexPath.row])
             tableView.deleteRows(at: [indexPath], with: .fade)
-                        
         }
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         let movieID = favoriteMovieDataSource[indexPath.row].movieID
-       // viewModel.coordinator.pushDetailVC(with: movieID, with: viewModel)
+        viewModel.coordinator.pushDetailVC(with: movieID, with: viewModel)
     }
     
 }

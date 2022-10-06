@@ -37,6 +37,22 @@ class FavoriteViewCoordinator: Coordinator {
 
 extension FavoriteViewCoordinator {
     
+    func pushDetailVC(with movieID: Int, with mainVM: FavoriteViewModel) {
+        
+        guard let movie = mainVM.retriveFavoriteMovieDetails(with: movieID) else {
+            
+            return
+        }
+        
+       let detailViewCoordinator = DetailViewCoordinator(naviagtionController: navigationController, movie: movie)
+        detailViewCoordinator.parentCoordinator = self
+        childCoordinator.append(detailViewCoordinator)
+        
+        print(movie.title)
+        
+        detailViewCoordinator.start()
+    }
+    
     func pushSearchVC() {
         
         let searchViewCoordinator = SearchViewCoordinator(naviagtionController: navigationController)

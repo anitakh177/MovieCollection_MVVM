@@ -27,13 +27,12 @@ final class DetailTableViewModel: TableViewModelType {
     
     func notificationToFavViewController() {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newDataNotif"), object: nil)
-        
     }
     
    func changeFavoriteStatus(cellViewModel: DetailTableCellViewModel, for id: Int, isFavorite: Bool ) {
         cellViewModel.isFavorite = isFavorite
         favoriteStoreService.changeStatus(id: cellViewModel.id, isFavorite: isFavorite)
-       print(" \(cellViewModel.title) is \(isFavorite)")
+        print(" \(cellViewModel.title) is \(isFavorite)")
       }
     
     func numberOfRows(in section: Int) -> Int {
@@ -72,10 +71,8 @@ final class DetailTableViewModel: TableViewModelType {
     }
     
     dispatchGroup.notify(queue: DispatchQueue.main) {
-        
+        }
     }
-    
-}
     
 }
 

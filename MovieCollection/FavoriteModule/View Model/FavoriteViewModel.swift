@@ -9,21 +9,23 @@ import Foundation
 
 class FavoriteViewModel {
     
-    weak var coordinator: FavoriteViewCoordinator!
+    // MARK: - Properties
     
-    var favoriteMovies: [Int] = []
-    var movieModel: FavoriteMovie?
-    var movieArray: [FavoriteMovie] = []
-    var favoriteMovieDataSource: Observable<[DeatilMovieViewModelCell]> = Observable(nil)
+    var movieModel: Movie?
+    var movieArray: [Movie] = []
+    var favoriteMovieDataSource: Observable<[PopularMovieCellViewModel]> = Observable(nil)
     
     let favoriteService = FavoriteMovieStorage()
     let dataFetchService = DataFetcherService()
-   
-   weak var delegate: DetailVCWillClose?
+    
+    // MARK: - Delegates
+    
+    weak var coordinator: FavoriteViewCoordinator!
+    weak var delegate: DetailVCWillClose?
     
     // MARK: - Methods
     
-    func remove(cellViewModel: DeatilMovieViewModelCell) {
+    func removeFavoriteMovie(cellViewModel: PopularMovieCellViewModel) {
         movieArray = movieArray.filter { !($0.id == cellViewModel.movieID) }
         favoriteService.changeStatus(id: cellViewModel.movieID, isFavorite: true)
         }
@@ -49,6 +51,13 @@ class FavoriteViewModel {
         return movieArray.count
     }
     
+    func retriveFavoriteMovieDetails(with id: Int) -> Movie? {
+        guard let movie = movieArray.first(where: {$0.id == id}) else {
+            return nil
+        }
+        return movie
+    }
+    
 }
 
 // MARK: - Private Methods
@@ -56,5 +65,5 @@ class FavoriteViewModel {
 private extension FavoriteViewModel {
     
     func mapFavoriteMovie() {
-        favoriteMovieDataSource.value = self.movieArray.compactMap({DeatilMovieViewModelCell(movie: $0)})    }
+        favoriteMovieDataSource.value = self.movieArray.compactMap({PopularMovieCellViewModel(movie: $0)})    }
 }

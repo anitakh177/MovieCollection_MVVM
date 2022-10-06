@@ -23,6 +23,7 @@ class ParametersTableViewCell: UITableViewCell {
     func configureCellData(viewModel: DetailTableCellViewModel) {
         releaseLabel.text = viewModel.releaseDate
         languageLabel.text = viewModel.originalLanguage.capitalized
+        durationLabel.text = "\(viewModel.duration)"
     }
     
 }

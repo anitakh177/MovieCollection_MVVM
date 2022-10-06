@@ -36,6 +36,8 @@ class MainViewController: UIViewController {
     }
 }
 
+// MARK: - Private Methods
+
 private extension MainViewController {
     
     func bindViewModel() {
@@ -90,6 +92,8 @@ private extension MainViewController {
     }
 }
 
+// MARK: - Table View Data Source & Delegate
+
 extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         return viewModel.numberOfSections()
@@ -113,11 +117,12 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
                 self.viewModel.coordinator.pushDetailVC(with: self.nowPlayingDataSource[index].movieID, with: self.viewModel)
             }
             return cell ?? UITableViewCell()
+            
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "\(PopularMovieTableViewCell.self)", for: indexPath) as? PopularMovieTableViewCell
-           let viewModel = popularMovieDataSource[indexPath.row]
+            let viewModel = popularMovieDataSource[indexPath.row]
             
-           cell?.configureCellData(viewModel: viewModel)
+            cell?.configureCellData(viewModel: viewModel)
             
             return cell ?? UITableViewCell()
         }

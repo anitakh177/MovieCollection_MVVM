@@ -11,9 +11,9 @@ class SearchViewModel {
    
     // MARK: - Properties
     
-    private var movieModel: Movie?
-    var genreData: GenreData?
-    let dataFetchService = DataFetcherService()
+    private var movieModel: MovieResult?
+    private var movieArray: [Movie] = []
+    private let dataFetchService = DataFetcherService()
     var popularMovieDataSource: Observable<[PopularMovieCellViewModel]> = Observable(nil)
     
     // MARK: - Delegate
@@ -23,33 +23,40 @@ class SearchViewModel {
     // MARK: - Methods
     
     func numberOfRows() -> Int {
-        return movieModel?.results.count ?? 0
+        return movieArray.count
     }
     
     func getData(for text: String) {
-        DispatchQueue.global(qos: .utility).async {
-            
-            self.dataFetchService.fetchGenres { [weak self] (result) in
-                self?.genreData = result
-                
-            }
-            self.dataFetchService.searchMovie(text: text) { [weak self] (result) in
-                guard let movie = result?.results else { return }
-                for name in movie {
-                    if name.title.lowercased().contains(text.lowercased()) {
-                        
-                        self?.movieModel = result
-                        self?.mapPopularMovieData()
-                        print(Thread.current)
+      
+      //  let dispatchGroup = DispatchGroup()
+        
+        self.dataFetchService.searchMovie(text: text) { [weak self] (result) in
+            guard let movie = result?.results else { return }
+            for name in movie {
+                if name.title.lowercased().contains(text.lowercased()) {
+                    self?.movieModel = result
+                    
+                    if let movieID = self?.movieModel?.results.map({$0.id}) {
+                       
+                        movieID.forEach { [weak self] (id) in
+                          //  dispatchGroup.enter()
+                            self?.dataFetchService.getMovieDetails(id: id) { [weak self] (result) in
+                                self?.movieArray.append(result!)
+                                self?.mapPopularMovieData()
+                             //   dispatchGroup.leave()
+                            }
+                        }
                     }
+                   
                 }
                 
             }
         }
+     
     }
     
-    func retrivePopulerMovieDetails(with id: Int) -> Result? {
-        guard let movie = movieModel?.results.first(where: {$0.id == id}) else {
+    func retriveMovieDetails(with id: Int) -> Movie? {
+        guard let movie = movieArray.first(where: {$0.id == id}) else {
             return nil
         }
         return movie
@@ -59,10 +66,8 @@ class SearchViewModel {
 
 private extension SearchViewModel {
      func mapPopularMovieData() {
-        guard let genreData = genreData else { return  }
-        
-        popularMovieDataSource.value = self.movieModel?.results.compactMap({ PopularMovieCellViewModel(movie: $0, genre: genreData)
-        })
+        popularMovieDataSource.value = self.movieArray.compactMap({ PopularMovieCellViewModel(movie: $0)
+    })
        
     }
     

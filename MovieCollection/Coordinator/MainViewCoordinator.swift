@@ -38,21 +38,11 @@ extension MainViewCoordinator {
     
     func pushDetailVC(with movieID: Int, with mainVM: MainViewModel) {
         
-        guard let movie = mainVM.retrivePopulerMovieDetails(with: movieID) else {
-            
-            return
-        }
+        guard let movie = mainVM.retrieveMovieDetails(with: movieID) else { return }
         
-        guard let genre = mainVM.genreData else {
-            
-            return
-        }
-        
-       let detailViewCoordinator = DetailViewCoordinator(naviagtionController: navigationController, movie: movie, genre: genre)
+        let detailViewCoordinator = DetailViewCoordinator(naviagtionController: navigationController, movie: movie)
         detailViewCoordinator.parentCoordinator = self
         childCoordinator.append(detailViewCoordinator)
-        
-        print(movie.title)
         
         detailViewCoordinator.start()
     }
