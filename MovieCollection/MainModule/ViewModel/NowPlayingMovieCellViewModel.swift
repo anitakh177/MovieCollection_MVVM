@@ -17,7 +17,6 @@ class NowPlayingMovieCellViewModel: CellViewModelType {
         
         self.title = movie.title
         self.movieID = movie.id
-
         self.image = makeImageURL(movie.posterPath)
     }
     

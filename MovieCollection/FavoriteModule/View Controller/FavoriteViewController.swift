@@ -25,6 +25,7 @@ class FavoriteViewController: UIViewController {
         configureNavigationBar()
         viewModel.getData()
         bindViewModel()
+        
     }
     
     override func viewDidLoad() {

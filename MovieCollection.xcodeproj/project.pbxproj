@@ -65,7 +65,6 @@
 		08E1643C28D83D0C0034818C /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E1643A28D83D0C0034818C /* SearchViewController.swift */; };
 		08E1643D28D83D0C0034818C /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08E1643B28D83D0C0034818C /* SearchViewController.xib */; };
 		08E9835128DC1FE9001C1E2C /* DetailTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E9835028DC1FE9001C1E2C /* DetailTableViewModel.swift */; };
-		08E9835428DC3D0E001C1E2C /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E9835328DC3D0E001C1E2C /* String.swift */; };
 		736FB3EDAD64E5B5DFF30C3A /* Pods_MovieCollection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCCEF7C1277327DE6E0FCC84 /* Pods_MovieCollection.framework */; };
 /* End PBXBuildFile section */
 
@@ -130,7 +129,6 @@
 		08E1643A28D83D0C0034818C /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		08E1643B28D83D0C0034818C /* SearchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchViewController.xib; sourceTree = "<group>"; };
 		08E9835028DC1FE9001C1E2C /* DetailTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewModel.swift; sourceTree = "<group>"; };
-		08E9835328DC3D0E001C1E2C /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		10E39DC44FE3E0112DDCAFFE /* Pods-MovieCollection.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieCollection.release.xcconfig"; path = "Target Support Files/Pods-MovieCollection/Pods-MovieCollection.release.xcconfig"; sourceTree = "<group>"; };
 		CCCEF7C1277327DE6E0FCC84 /* Pods_MovieCollection.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MovieCollection.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -170,7 +168,6 @@
 		082EC08D28C8D83B0023F99A /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				08E9835328DC3D0E001C1E2C /* String.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -602,7 +599,6 @@
 				08CC6D8128C767E000D05968 /* MovieResult.swift in Sources */,
 				08C3537128E2C28D00C382B1 /* AppCoordinator.swift in Sources */,
 				08323B8528CB4B0600984508 /* DetailViewController.swift in Sources */,
-				08E9835428DC3D0E001C1E2C /* String.swift in Sources */,
 				08CC6D7928C7677700D05968 /* NetworkService.swift in Sources */,
 				088CD00F28D0528F000DDABA /* CastCollectionViewCell.swift in Sources */,
 				08D95DF728D5B63A006A7280 /* PlayingTableViewCell.swift in Sources */,

@@ -54,6 +54,7 @@ class FavoriteMovieStorage {
 private extension FavoriteMovieStorage {
     
     func saveFavoriteItem(_ id: Int) {
+       
         savedMovies.insert(id, at: 0)
         saveToUserDefaults()
     }
