@@ -36,11 +36,6 @@ class DataFetcherService {
         dataFetcher.fetchGenericJSONData(urlString: urlCast, response: completin)
     }
     
-    func fetchCastImage(castID: Int, completion: @escaping(CastImage?) -> Void) {
-        let urlCastImage = "https://api.themoviedb.org/3/person/\(castID)/images?api_key=\(apiKey)"
-        dataFetcher.fetchGenericJSONData(urlString: urlCastImage, response: completion)
-    }
-    
     func searchMovie(text: String, completion: @escaping(MovieResult?) -> Void) {
         let encodedText = text.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
         let urlSearch =  String(format: "https://api.themoviedb.org/3/search/movie?api_key=\(apiKey)&language=en-US&query=%@", encodedText)

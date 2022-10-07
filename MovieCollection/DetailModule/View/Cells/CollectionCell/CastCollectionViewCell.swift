@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class CastCollectionViewCell: UICollectionViewCell {
     
@@ -21,6 +22,7 @@ class CastCollectionViewCell: UICollectionViewCell {
     
     func configureCellData(viewModel: CastCollectionViewModel) {
         castName.text = viewModel.name
+        castImage.sd_setImage(with: viewModel.image)
     }
 
 }

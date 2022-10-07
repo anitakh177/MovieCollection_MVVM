@@ -114,6 +114,7 @@ extension SearchViewController: UISearchBarDelegate {
            bindViewModel()
           
        }
+       print(Thread.isMainThread)
        tableView.reloadData()
     }
    

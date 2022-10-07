@@ -15,7 +15,6 @@ final class DetailTableViewModel: TableViewModelType {
     private let dataFetchService = DataFetcherService()
     private let favoriteStoreService = FavoriteMovieStorage()
     private var castData: Cast?
-    private var castImageData: CastImage?
     
     // MARK: - Delegate
     
@@ -44,34 +43,15 @@ final class DetailTableViewModel: TableViewModelType {
     }
     
     func getData() {
-    let dispatchGroup = DispatchGroup()
-    
+   
     guard let movieID = delegateCast?.getMovieID() else { return }
     
-    dispatchGroup.enter()
     dataFetchService.fetchCast(movieID: movieID) { [weak self] (result) in
         self?.castData = result
         self?.mapCastCell()
+      
     }
     
-    dispatchGroup.leave()
-    
-    guard let personID = delegateCast?.getPersonID() else { return }
-    
-    _ = DispatchQueue.global(qos: .userInitiated)
-        
-        DispatchQueue.concurrentPerform(iterations: personID.count) { index in
-        let id = personID[index]
-        dispatchGroup.enter()
-        dataFetchService.fetchCastImage(castID: id) { [weak self] (result) in
-            self?.castImageData = result
-            dispatchGroup.leave()
-        }
-     
-    }
-    
-    dispatchGroup.notify(queue: DispatchQueue.main) {
-        }
     }
     
 }

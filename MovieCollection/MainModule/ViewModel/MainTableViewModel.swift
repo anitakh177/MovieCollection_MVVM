@@ -44,6 +44,21 @@ class MainViewModel: TableViewModelType {
     }
     
     func getData() {
+        
+        dataFetchService.fetchPopularMovie { [weak self] (result) in
+            self?.movieModel = result
+            if let movieID = self?.movieModel?.results.map({$0.id}) {
+                
+                movieID.forEach { [weak self] (id) in
+                    self?.dataFetchService.getMovieDetails(id: id) { [weak self] (result) in
+                        
+                        self?.movieArray.append(result!)
+                        self?.mapPopularMovieData()
+                    }
+                    
+                }
+            }
+        }
             
             dataFetchService.fetchNowMovie { [weak self] (result) in
                 self?.movieModel = result
@@ -60,21 +75,6 @@ class MainViewModel: TableViewModelType {
                 
             }
             
-            dataFetchService.fetchPopularMovie { [weak self] (result) in
-                self?.movieModel = result
-                if let movieID = self?.movieModel?.results.map({$0.id}) {
-                    
-                    movieID.forEach { [weak self] (id) in
-                        self?.dataFetchService.getMovieDetails(id: id) { [weak self] (result) in
-                            
-                            self?.movieArray.append(result!)
-                            self?.mapPopularMovieData()
-                        }
-                        
-                    }
-                }
-            }
-        
     }
     
     func retrieveMovieDetails(with id: Int) -> Movie? {

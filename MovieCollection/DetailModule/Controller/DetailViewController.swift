@@ -13,7 +13,6 @@ protocol DetailVCWillClose: AnyObject {
 
 protocol FetchCast: AnyObject {
     func getMovieID() -> Int
-    func getPersonID() -> [Int]
 }
 
 class DetailViewController: UIViewController {
@@ -174,13 +173,6 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
 }
 
 extension DetailViewController: FetchCast {
-    
-    func getPersonID() -> [Int] {
-        let id = castCellDataSource.compactMap({$0.personID})
-        print(id)
-        return id
-    }
-    
     func getMovieID() -> Int {
         
         return cellViewModel?.id ?? 0

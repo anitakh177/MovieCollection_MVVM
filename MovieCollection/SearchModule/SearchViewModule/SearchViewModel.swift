@@ -28,28 +28,28 @@ class SearchViewModel {
     
     func getData(for text: String) {
       
-      //  let dispatchGroup = DispatchGroup()
-        
-        self.dataFetchService.searchMovie(text: text) { [weak self] (result) in
-            guard let movie = result?.results else { return }
-            for name in movie {
-                if name.title.lowercased().contains(text.lowercased()) {
-                    self?.movieModel = result
-                    
-                    if let movieID = self?.movieModel?.results.map({$0.id}) {
-                       
-                        movieID.forEach { [weak self] (id) in
-                          //  dispatchGroup.enter()
-                            self?.dataFetchService.getMovieDetails(id: id) { [weak self] (result) in
-                                self?.movieArray.append(result!)
-                                self?.mapPopularMovieData()
-                             //   dispatchGroup.leave()
+        DispatchQueue.global(qos: .userInitiated).async {
+            self.dataFetchService.searchMovie(text: text) { [weak self] (result) in
+                guard let movie = result?.results else { return }
+                for name in movie {
+                    if name.title.lowercased().contains(text.lowercased()) {
+                        self?.movieModel = result
+                        
+                        if let movieID = self?.movieModel?.results.map({$0.id}) {
+                            
+                            DispatchQueue.concurrentPerform(iterations: movieID.count) { index in
+                                let id = movieID[index]
+                                self?.dataFetchService.getMovieDetails(id: id) { [weak self] (result) in
+                                    self?.movieArray.append(result!)
+                                    self?.mapPopularMovieData()
+                                   
+                                }
                             }
                         }
+                        
                     }
-                   
+                    
                 }
-                
             }
         }
      
