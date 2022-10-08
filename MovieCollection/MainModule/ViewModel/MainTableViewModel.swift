@@ -7,7 +7,7 @@
 
 import Foundation
 
-class MainViewModel: TableViewModelType {
+final class MainViewModel: TableViewModelType {
     
     // MARK: - Properties
 

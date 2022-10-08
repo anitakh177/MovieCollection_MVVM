@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CastTableViewCell: UITableViewCell {
+final class CastTableViewCell: UITableViewCell {
     
     // MARK: - Views
     

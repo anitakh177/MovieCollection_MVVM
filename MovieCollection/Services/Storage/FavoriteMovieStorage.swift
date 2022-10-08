@@ -7,7 +7,7 @@
 
 import Foundation
 
-class FavoriteMovieStorage {
+final class FavoriteMovieStorage {
     
     private let itemKey = "movieID"
     private var savedMovies: [Int] = []

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class OverviewTableViewCell: UITableViewCell {
+final class OverviewTableViewCell: UITableViewCell {
     
     // MARK: - Views
 

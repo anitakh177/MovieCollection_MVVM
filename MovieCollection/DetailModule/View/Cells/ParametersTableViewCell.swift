@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ParametersTableViewCell: UITableViewCell {
+final class ParametersTableViewCell: UITableViewCell {
     
     // MARK: - Views
 

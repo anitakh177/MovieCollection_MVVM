@@ -7,7 +7,7 @@
 
 import Foundation
 
-class FavoriteViewModel {
+final class FavoriteViewModel {
     
     // MARK: - Properties
     
@@ -15,13 +15,12 @@ class FavoriteViewModel {
     var movieArray: [Movie] = []
     var favoriteMovieDataSource: Observable<[PopularMovieCellViewModel]> = Observable(nil)
     
-    let favoriteService = FavoriteMovieStorage()
-    let dataFetchService = DataFetcherService()
+    private let favoriteService = FavoriteMovieStorage()
+    private let dataFetchService = DataFetcherService()
     
     // MARK: - Delegates
     
     weak var coordinator: FavoriteViewCoordinator!
-    weak var delegate: DetailVCWillClose?
     
     // MARK: - Methods
     

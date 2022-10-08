@@ -20,7 +20,6 @@ final class DetailTableViewModel: TableViewModelType {
     
     weak var coordinator: DetailViewCoordinator!
     weak var delegateCast: FetchCast?
-    var detailWillCloseDelegate: DetailVCWillClose?
     
     // MARK: - Methods
     

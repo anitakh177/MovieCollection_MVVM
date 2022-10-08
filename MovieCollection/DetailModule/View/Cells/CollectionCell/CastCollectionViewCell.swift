@@ -8,7 +8,7 @@
 import UIKit
 import SDWebImage
 
-class CastCollectionViewCell: UICollectionViewCell {
+final class CastCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Views
 

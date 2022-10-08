@@ -7,7 +7,7 @@
 
 import Foundation
 
-class DataFetcherService {
+final class DataFetcherService {
     
     private let apiKey = "62d229b93c02da4c5355f1bfe7de1181"
     var dataFetcher: DataFetcher
@@ -24,11 +24,6 @@ class DataFetcherService {
     func fetchNowMovie(completion: @escaping(MovieResult?) -> Void) {
         let urlMovie = "https://api.themoviedb.org/3/movie/now_playing?api_key=\(apiKey)&language=en-US"
         dataFetcher.fetchGenericJSONData(urlString: urlMovie, response: completion)
-    }
-    
-    func fetchGenres(completion: @escaping(GenreData?) -> Void) {
-        let urlGenre = "https://api.themoviedb.org/3/genre/movie/list?api_key=\(apiKey)&language=en-US"
-        dataFetcher.fetchGenericJSONData(urlString: urlGenre, response: completion)
     }
     
     func fetchCast(movieID: Int, completin: @escaping(Cast?) -> Void) {

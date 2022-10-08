@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TitleTableViewCell: UITableViewCell {
+final class TitleTableViewCell: UITableViewCell {
     
     // MARK: - Constants
     

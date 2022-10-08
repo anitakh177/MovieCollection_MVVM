@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FavoriteViewController: UIViewController {
+final class FavoriteViewController: UIViewController {
     
     // MARK: - Views
     
@@ -30,7 +30,6 @@ class FavoriteViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.delegate = self
         configureApperance()
     }
 }
@@ -43,7 +42,9 @@ private extension FavoriteViewController {
         viewModel.favoriteMovieDataSource.bind { [weak self] (result) in
             guard let self = self, let result = result else { return }
             self.favoriteMovieDataSource = result
-            self.tableView.reloadData()
+            DispatchQueue.main.async { [weak self] in
+                self?.tableView.reloadData()
+            }
         }
     }
     
@@ -101,14 +102,6 @@ extension FavoriteViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         let movieID = favoriteMovieDataSource[indexPath.row].movieID
         viewModel.coordinator.pushDetailVC(with: movieID, with: viewModel)
-    }
-    
-}
-
-extension FavoriteViewController: DetailVCWillClose {
-    func detailVCWillClose() {
-        print("closing")
-        tableView.reloadData()
     }
     
 }

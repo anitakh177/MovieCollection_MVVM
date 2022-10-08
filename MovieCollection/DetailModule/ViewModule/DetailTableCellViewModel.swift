@@ -32,12 +32,13 @@ final class DetailTableCellViewModel {
         self.isFavorite = storage.isFavoriteItem(id: id)
         self.image = makeImageURL(movie.posterPath)
         self.genres = getGenreString(genreData: movie)
-        self.duration = "\(movie.runtime)"
+        self.duration = stringFromTime(time: movie.runtime)
     }
     
 // MARK: - Properties
     
-    let storage = FavoriteMovieStorage()
+    private let storage = FavoriteMovieStorage()
+   
 }
 
 // MARK: - Privite Methods
@@ -54,27 +55,15 @@ private extension DetailTableCellViewModel {
     }
     
     func makeImageURL(_ imageCode: String) -> URL? {
-        URL(string: "https://image.tmdb.org/t/p/w500/\(imageCode)")
-        
+       return URL(string: "https://image.tmdb.org/t/p/w500/\(imageCode)")
     }
     
-    func convertToHours(minutes: Int) -> String {
-        let formatter = DateComponentsFormatter()
-        formatter.unitsStyle = .brief
-        formatter.allowedUnits = [.hour, .minute]
-        
-        let formattedString = formatter.string(from: TimeInterval(minutes))!
-        print(formattedString)
-        return formattedString
-        
+    func minutesToHoursAndMinutes(_ minutes: Int) -> (hours: Int, leftMinutes: Int) {
+        return (minutes / 60, (minutes % 60))
     }
-    func stringFromTimeInterval(time: Int) -> String {
-        
-        let minutes = (time / 60) % 60
-        let hours = (time / 3600)
-        
-        return String(format: "%0.2d:%0.2d", hours, minutes)
-        
+    func stringFromTime(time: Int) -> String {
+        let tuple = minutesToHoursAndMinutes(time)
+        return String("\(tuple.hours)h \(tuple.leftMinutes)m")
     }
-    
+
 }

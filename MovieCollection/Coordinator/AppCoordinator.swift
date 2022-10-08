@@ -15,7 +15,7 @@ protocol Coordinator: AnyObject {
     func start()
 }
 
-class AppCoordinator: Coordinator {
+final class AppCoordinator: Coordinator {
     
     private let allTab: [TabBarModel] = [.home, .favorite]
     

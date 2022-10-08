@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class DetailViewCoordinator: Coordinator {
+final class DetailViewCoordinator: Coordinator {
        
     weak var parentCoordinator: Coordinator?
     

@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class MainViewCoordinator: Coordinator {
+final class MainViewCoordinator: Coordinator {
     
     var childCoordinator: [Coordinator] = []
     

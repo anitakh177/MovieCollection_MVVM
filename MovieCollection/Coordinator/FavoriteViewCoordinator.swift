@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class FavoriteViewCoordinator: Coordinator {
+final class FavoriteViewCoordinator: Coordinator {
     
     var childCoordinator: [Coordinator] = []
     

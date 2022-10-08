@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class SearchViewCoordinator: Coordinator {
+final class SearchViewCoordinator: Coordinator {
     
     weak var parentCoordinator: Coordinator?
     

@@ -8,7 +8,7 @@
 import UIKit
 import SDWebImage
 
-class PopularMovieTableViewCell: UITableViewCell {
+final class PopularMovieTableViewCell: UITableViewCell {
     
     // MARK: - Views
 

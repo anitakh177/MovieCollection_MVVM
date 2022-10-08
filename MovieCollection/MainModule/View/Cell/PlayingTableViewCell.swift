@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PlayingTableViewCell: UITableViewCell {
+final class PlayingTableViewCell: UITableViewCell {
     
     // MARK: - Views
     

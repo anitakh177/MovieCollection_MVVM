@@ -7,7 +7,7 @@
 
 import Foundation
 
-class NowPlayingMovieCellViewModel: CellViewModelType {
+final class NowPlayingMovieCellViewModel: CellViewModelType {
     
     var image: URL?
     var title: String

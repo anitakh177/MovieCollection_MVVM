@@ -7,7 +7,7 @@
 
 import Foundation
 
-class PopularMovieCellViewModel: CellViewModelType {
+final class PopularMovieCellViewModel: CellViewModelType {
     
     var movieID: Int
     var title: String

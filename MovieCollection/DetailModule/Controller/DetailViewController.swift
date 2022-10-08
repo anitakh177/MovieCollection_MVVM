@@ -7,15 +7,11 @@
 
 import UIKit
 
-protocol DetailVCWillClose: AnyObject {
-    func detailVCWillClose()
-}
-
 protocol FetchCast: AnyObject {
     func getMovieID() -> Int
 }
 
-class DetailViewController: UIViewController {
+final class DetailViewController: UIViewController {
 
     // MARK: - Views
     
@@ -171,6 +167,8 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
 }
+
+// MARK: - Get Movie ID Delegate
 
 extension DetailViewController: FetchCast {
     func getMovieID() -> Int {
